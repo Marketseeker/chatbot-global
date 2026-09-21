@@ -1,0 +1,7 @@
+temporary screenshots/
+brand_assests/
+node_modules/
+serve.mjs
+screenshot.mjs
+CLAUDE.md
+.claude/

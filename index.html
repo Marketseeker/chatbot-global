@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chatbot Global | AI chat that speaks every customer's language</title>
+<meta name="description" content="Chatbot Global deploys AI assistants that answer, qualify and support customers in 60+ languages, around the clock.">
+<link rel="icon" type="image/svg+xml" href="brand_assets/chatbot-global-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:   { DEFAULT: '#0A2B32', 700: '#14525C', 500: '#3C6B73', 300: '#8FB0B4' },
+        coral: { DEFAULT: '#FF7A59', 600: '#F2603C', 100: '#FFE3DA' },
+        cream: { DEFAULT: '#F4EFE6', 200: '#EAE3D5', 50: '#FBF8F2' }
+      },
+      fontFamily: {
+        display: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+      },
+      boxShadow: {
+        raised:   '0 1px 2px rgba(10,43,50,.06), 0 8px 24px -8px rgba(10,43,50,.14)',
+        floating: '0 2px 4px rgba(10,43,50,.05), 0 24px 48px -16px rgba(10,43,50,.28), 0 48px 96px -32px rgba(20,82,92,.30)',
+        coral:    '0 1px 2px rgba(242,96,60,.35), 0 10px 24px -8px rgba(255,122,89,.55)'
+      }
+    }
+  }
+}
+</script>
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; line-height: 1.7; background: #F4EFE6; color: #0A2B32; }
+  .font-display { letter-spacing: -0.03em; line-height: 1.04; font-variation-settings: 'opsz' 60; font-variant-numeric: lining-nums; }
+  h1.font-display { letter-spacing: -0.028em; }
+
+  /* grain overlay */
+  .grain::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .04 0 0 0 0 .17 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* spring motion: transform + opacity only */
+  .spring { transition-property: transform, opacity; transition-duration: .4s; transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
+  .lift:hover { transform: translateY(-3px); }
+  .lift:active { transform: translateY(0) scale(.98); }
+  .press:active { transform: scale(.96); }
+  :focus-visible { outline: 2px solid #FF7A59; outline-offset: 3px; border-radius: 10px; }
+
+  .reveal { opacity: 0; transform: translateY(18px); }
+  .reveal.in { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.34,1.3,.64,1); }
+
+  .msg { animation: pop .45s cubic-bezier(.34,1.56,.64,1) both; transform-origin: bottom left; }
+  .msg.user { transform-origin: bottom right; }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.94); } to { opacity: 1; transform: none; } }
+  .dot { animation: blink 1.2s infinite ease-in-out; }
+  .dot:nth-child(2) { animation-delay: .15s; } .dot:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%,80%,100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+  .float { animation: float 7s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .chat-panel { transform-origin: bottom right; }
+  .chat-panel[data-open="false"] { opacity: 0; transform: translateY(16px) scale(.92); pointer-events: none; }
+  #chat-scroll { scrollbar-width: thin; scrollbar-color: #8FB0B4 transparent; }
+  @media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-40">
+  <div class="mx-auto mt-4 flex max-w-6xl items-center justify-between rounded-full border border-ink/10 bg-cream-50/80 px-4 py-2.5 shadow-raised backdrop-blur-xl sm:px-6" style="width:calc(100% - 2rem)">
+    <a href="#top" class="spring press flex items-center gap-2.5 rounded-full" aria-label="Chatbot Global home">
+      <svg viewBox="0 0 64 64" class="h-9 w-9" aria-hidden="true">
+        <defs>
+          <linearGradient id="nbg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#14525C"/><stop offset="1" stop-color="#0A2B32"/></linearGradient>
+          <clipPath id="ng"><circle cx="32" cy="29" r="19"/></clipPath>
+        </defs>
+        <path d="M32 3C16.5 3 4 14.7 4 29.2c0 8.2 4 15.5 10.3 20.3L11 60.5c-.3 1 .8 1.7 1.6 1.1L25.2 54c2.2.4 4.4.6 6.8.6 15.5 0 28-11.7 28-26.200S47.500 3 32 3Z" fill="url(#nbg)"/>
+        <g clip-path="url(#ng)" fill="none" stroke="#F4EFE6" stroke-width="1.8" stroke-linecap="round"><circle cx="32" cy="29" r="19"/><ellipse cx="32" cy="29" rx="8.5" ry="19"/><path d="M13 29h38M16 20.5c10 3.5 22 3.5 32 0M16 37.5c10-3.5 22-3.5 32 0"/></g>
+        <circle cx="47.5" cy="14.5" r="5" fill="#FF7A59" stroke="#0A2B32" stroke-width="1.5"/>
+      </svg>
+      <span class="leading-none"><span class="font-display block text-[19px] font-bold tracking-tight">Chatbot</span><span class="block text-[8.5px] font-semibold uppercase tracking-[.42em] text-coral-600">Global</span></span>
+    </a>
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+      <a href="#features" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Features</a>
+      <a href="#how" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">How it works</a>
+      <a href="#results" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Results</a>
+      <a href="#pricing" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Pricing</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="#demo" class="spring lift hidden rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-ink/5 active:bg-ink/10 sm:inline-block">Try the demo</a>
+      <a href="#cta" class="spring lift rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-cream-50 shadow-raised hover:bg-ink-700 active:bg-ink">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="grain relative overflow-hidden pt-32 pb-20 sm:pt-40 lg:pb-28" style="background:
+  radial-gradient(60rem 36rem at 88% 8%, rgba(255,122,89,.20), transparent 60%),
+  radial-gradient(48rem 32rem at 4% 30%, rgba(20,82,92,.16), transparent 62%),
+  radial-gradient(40rem 28rem at 60% 100%, rgba(143,176,180,.28), transparent 65%), #F4EFE6;">
+  <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-5 lg:grid-cols-[1.05fr_.95fr] lg:gap-10">
+    <div>
+      <p class="reveal spring inline-flex items-center gap-2 rounded-full border border-ink/10 bg-cream-50/70 px-3.5 py-1.5 text-[13px] font-medium text-ink-700 shadow-raised">
+        <span class="h-2 w-2 rounded-full bg-coral"></span> Now live in 60+ languages
+      </p>
+      <h1 class="reveal font-display mt-6 text-[clamp(2.75rem,7vw,5.5rem)] font-semibold text-ink">
+        Conversations that <em class="not-italic text-coral-600">cross every border.</em>
+      </h1>
+      <p class="reveal mt-6 max-w-xl text-lg text-ink-500">
+        Chatbot Global deploys AI assistants that greet, qualify and support your customers in their own language, on your website, 24 hours a day, with a human handoff whenever it matters.
+      </p>
+      <div class="reveal mt-9 flex flex-wrap items-center gap-3">
+        <a href="#cta" class="spring lift rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600">Start free trial</a>
+        <a href="#demo" class="spring lift inline-flex items-center gap-2 rounded-full border border-ink/15 bg-cream-50/60 px-6 py-3.5 text-[15px] font-semibold text-ink shadow-raised hover:bg-cream-50 active:bg-cream-200">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg>
+          Chat with the demo
+        </a>
+      </div>
+      <dl class="reveal mt-12 flex flex-wrap gap-x-10 gap-y-5 border-t border-ink/10 pt-7">
+        <div><dt class="sr-only">Languages</dt><dd class="font-display text-3xl font-semibold tracking-tight">60+</dd><p class="text-sm text-ink-500">languages supported</p></div>
+        <div><dt class="sr-only">Response time</dt><dd class="font-display text-3xl font-semibold tracking-tight">&lt;2s</dd><p class="text-sm text-ink-500">average reply time</p></div>
+        <div><dt class="sr-only">Resolution</dt><dd class="font-display text-3xl font-semibold tracking-tight">84%</dd><p class="text-sm text-ink-500">resolved without an agent</p></div>
+      </dl>
+    </div>
+
+    <!-- DEMO CHATBOT PLACEHOLDER -->
+    <div id="demo" class="reveal relative mx-auto w-full max-w-md scroll-mt-28 lg:ml-auto">
+      <div class="float absolute -right-16 top-24 z-10 hidden rounded-2xl border border-ink/10 bg-cream-50 px-4 py-3 shadow-floating xl:block">
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-ink-500">Detected</p>
+        <p class="text-sm font-semibold">Español · Madrid</p>
+      </div>
+
+      <!-- Integration point: replace this block (or mount your widget script) at #chatbot-mount -->
+      <div id="chatbot-mount" class="relative overflow-hidden rounded-[28px] border border-ink/10 bg-cream-50 shadow-floating">
+        <div class="flex items-center gap-3 bg-ink px-5 py-4 text-cream-50" style="background-image: radial-gradient(18rem 8rem at 100% 0%, rgba(255,122,89,.28), transparent 70%), radial-gradient(14rem 8rem at 0% 100%, rgba(20,82,92,.9), transparent 70%);">
+          <div class="relative grid h-10 w-10 place-items-center rounded-full bg-cream/15 ring-1 ring-cream/20">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="3.6" ry="9"/><path d="M3 12h18"/></svg>
+            <span class="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-ink bg-[#6FE3A5]"></span>
+          </div>
+          <div class="leading-tight"><p class="text-[15px] font-semibold">Globa · AI assistant</p><p class="text-xs text-cream/70">Online · replies instantly</p></div>
+          <span class="ml-auto rounded-full bg-cream/10 px-2.5 py-1 text-[11px] font-medium tracking-wide text-cream/80">DEMO</span>
+        </div>
+
+        <div id="chat-scroll" class="h-[22rem] space-y-3 overflow-y-auto px-4 py-5" style="background: radial-gradient(20rem 12rem at 100% 0%, rgba(255,122,89,.07), transparent 70%), #FBF8F2;" aria-live="polite" role="log" aria-label="Chat conversation"></div>
+
+        <div class="border-t border-ink/10 bg-cream-50 px-4 pb-4 pt-3">
+          <div id="chips" class="mb-3 flex flex-wrap gap-2"></div>
+          <form id="chat-form" class="flex items-center gap-2 rounded-full border border-ink/15 bg-white py-1.5 pl-4 pr-1.5 shadow-raised" autocomplete="off">
+            <label for="chat-input" class="sr-only">Message</label>
+            <input id="chat-input" type="text" placeholder="Type a message…" class="min-w-0 flex-1 bg-transparent text-[15px] text-ink placeholder:text-ink-300 focus:outline-none">
+            <button type="submit" class="spring press grid h-10 w-10 place-items-center rounded-full bg-coral text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600" aria-label="Send message">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+          <p class="mt-2.5 text-center text-[11px] text-ink-300">Placeholder chatbot · scripted replies for demonstration</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP -->
+<section class="border-y border-ink/10 bg-cream-50" aria-label="Trusted by">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-12 gap-y-4 px-5 py-8 sm:justify-between">
+    <p class="w-full text-center text-xs font-semibold uppercase tracking-[.2em] text-ink-300 sm:w-auto">Trusted by teams at</p>
+    <span class="font-display text-xl font-semibold text-ink-300">Northwind</span>
+    <span class="font-display text-xl font-semibold italic text-ink-300">Lumen&amp;Co</span>
+    <span class="font-display text-xl font-semibold text-ink-300">Atlas Freight</span>
+    <span class="font-display text-xl font-semibold italic text-ink-300">Kestrel</span>
+    <span class="font-display text-xl font-semibold text-ink-300">Meridian</span>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="scroll-mt-20 py-24 sm:py-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-[.2em] text-coral-600">Features</p>
+      <h2 class="font-display mt-4 text-4xl font-semibold sm:text-5xl">Everything a global support team does, without the timezone.</h2>
+    </div>
+    <div class="mt-14 grid gap-5 md:grid-cols-6">
+      <article class="reveal spring lift relative overflow-hidden rounded-3xl bg-ink p-8 text-cream-50 shadow-floating md:col-span-4" style="background-image: radial-gradient(28rem 16rem at 100% 0%, rgba(255,122,89,.30), transparent 70%), radial-gradient(22rem 14rem at 0% 100%, rgba(60,107,115,.7), transparent 70%);">
+        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-cream/10 ring-1 ring-cream/15"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="3.6" ry="9"/><path d="M3 12h18"/></svg></div>
+        <h3 class="font-display mt-6 text-3xl font-semibold">Native fluency in 60+ languages</h3>
+        <p class="mt-3 max-w-lg text-cream/75">Detects the visitor's language on the first message and replies with regional phrasing, tone and currency, not word-for-word translation.</p>
+        <div class="mt-7 flex flex-wrap gap-2">
+          <span class="rounded-full bg-cream/10 px-3 py-1 text-sm ring-1 ring-cream/15">English</span><span class="rounded-full bg-cream/10 px-3 py-1 text-sm ring-1 ring-cream/15">Español</span><span class="rounded-full bg-cream/10 px-3 py-1 text-sm ring-1 ring-cream/15">Français</span><span class="rounded-full bg-cream/10 px-3 py-1 text-sm ring-1 ring-cream/15">Deutsch</span><span class="rounded-full bg-cream/10 px-3 py-1 text-sm ring-1 ring-cream/15">日本語</span><span class="rounded-full bg-cream/10 px-3 py-1 text-sm ring-1 ring-cream/15">العربية</span><span class="rounded-full bg-coral/90 px-3 py-1 text-sm font-medium text-ink">+54 more</span>
+        </div>
+      </article>
+      <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
+        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-coral-100 text-coral-600"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3 class="font-display mt-6 text-2xl font-semibold">Always on</h3>
+        <p class="mt-3 text-ink-500">Instant answers at 3&nbsp;a.m. in Tokyo or 3&nbsp;p.m. in Toronto. No queues.</p>
+      </article>
+      <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
+        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-ink/5 text-ink-700"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg></div>
+        <h3 class="font-display mt-6 text-2xl font-semibold">Human handoff</h3>
+        <p class="mt-3 text-ink-500">Escalates with the full transcript when a customer needs a person.</p>
+      </article>
+      <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
+        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-ink/5 text-ink-700"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+        <h3 class="font-display mt-6 text-2xl font-semibold">Lead capture</h3>
+        <p class="mt-3 text-ink-500">Qualifies visitors and syncs contacts to your CRM automatically.</p>
+      </article>
+      <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
+        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-ink/5 text-ink-700"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.500 3.300 7.800 8 9 4.700-1.200 8-4.500 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3 class="font-display mt-6 text-2xl font-semibold">Private by design</h3>
+        <p class="mt-3 text-ink-500">Encrypted in transit and at rest, with regional data residency options.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="scroll-mt-20 bg-cream-50 py-24 sm:py-32">
+  <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 lg:grid-cols-2">
+    <div class="reveal relative overflow-hidden rounded-[28px] shadow-floating">
+      <img src="https://placehold.co/900x1000/14525C/F4EFE6?text=Product+Preview" alt="Placeholder product dashboard preview" class="h-full w-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-[#14525C] mix-blend-multiply"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+      <div class="absolute bottom-5 left-5 right-5 rounded-2xl bg-cream-50/90 p-4 shadow-floating backdrop-blur">
+        <p class="text-xs font-semibold uppercase tracking-wider text-ink-500">This week</p>
+        <p class="font-display text-2xl font-semibold">12,480 conversations handled</p>
+      </div>
+    </div>
+    <div>
+      <p class="reveal text-sm font-semibold uppercase tracking-[.2em] text-coral-600">How it works</p>
+      <h2 class="reveal font-display mt-4 text-4xl font-semibold sm:text-5xl">Live in an afternoon, not a quarter.</h2>
+      <ol class="mt-10 space-y-8">
+        <li class="reveal flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-cream-50 shadow-raised">1</span><div><h3 class="text-lg font-semibold">Connect your knowledge</h3><p class="text-ink-500">Point Chatbot Global at your help center, docs or product catalog. It learns in minutes.</p></div></li>
+        <li class="reveal flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-cream-50 shadow-raised">2</span><div><h3 class="text-lg font-semibold">Shape its voice</h3><p class="text-ink-500">Set tone, boundaries and handoff rules so it sounds like your brand.</p></div></li>
+        <li class="reveal flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-coral text-lg font-semibold text-ink shadow-coral">3</span><div><h3 class="text-lg font-semibold">Paste one line of code</h3><p class="text-ink-500">Drop the snippet on your site and start answering customers worldwide.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS / TESTIMONIAL -->
+<section id="results" class="scroll-mt-20 py-24 sm:py-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="grid gap-5 md:grid-cols-3">
+      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-5xl font-semibold text-coral-600">3.2×</p><p class="mt-2 text-ink-500">faster first response across time zones</p></div>
+      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-5xl font-semibold text-coral-600">41%</p><p class="mt-2 text-ink-500">lower cost per resolved conversation</p></div>
+      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-5xl font-semibold text-coral-600">+27%</p><p class="mt-2 text-ink-500">more qualified leads from international traffic</p></div>
+    </div>
+    <figure class="reveal relative mt-5 overflow-hidden rounded-[28px] bg-ink p-10 text-cream-50 shadow-floating sm:p-14" style="background-image: radial-gradient(30rem 16rem at 90% 0%, rgba(255,122,89,.26), transparent 70%), radial-gradient(24rem 14rem at 0% 100%, rgba(60,107,115,.75), transparent 70%);">
+      <blockquote class="font-display max-w-3xl text-2xl font-medium leading-snug sm:text-4xl" style="letter-spacing:-0.02em">“We opened in eleven new markets without hiring a single extra support agent. Customers assume we have a team in every country.”</blockquote>
+      <figcaption class="mt-8 flex items-center gap-4">
+        <img src="https://placehold.co/96x96/FF7A59/0A2B32?text=AR" alt="" class="h-12 w-12 rounded-full ring-2 ring-cream/30">
+        <div><p class="font-semibold">Ana Reyes</p><p class="text-sm text-cream/65">Head of Customer Experience, Atlas Freight</p></div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="scroll-mt-20 bg-cream-50 py-24 sm:py-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[.2em] text-coral-600">Pricing</p>
+      <h2 class="font-display mt-4 text-4xl font-semibold sm:text-5xl">Simple plans that scale with you.</h2>
+    </div>
+    <div class="mt-14 grid items-stretch gap-5 md:grid-cols-3">
+      <div class="reveal flex flex-col rounded-3xl border border-ink/10 bg-cream p-8 shadow-raised">
+        <h3 class="text-lg font-semibold">Starter</h3><p class="mt-1 text-sm text-ink-500">For small sites getting going</p>
+        <p class="font-display mt-6 text-5xl font-semibold">$49<span class="text-base font-medium tracking-normal text-ink-500">/mo</span></p>
+        <ul class="mt-6 flex-1 space-y-3 text-[15px] text-ink-700"><li>1,000 conversations</li><li>10 languages</li><li>Email support</li></ul>
+        <a href="#cta" class="spring lift mt-8 rounded-full border border-ink/15 bg-cream-50 px-6 py-3 text-center text-[15px] font-semibold hover:bg-white active:bg-cream-200">Choose Starter</a>
+      </div>
+      <div class="reveal relative flex flex-col rounded-3xl bg-ink p-8 text-cream-50 shadow-floating md:-my-4" style="background-image: radial-gradient(22rem 12rem at 100% 0%, rgba(255,122,89,.30), transparent 70%);">
+        <span class="absolute right-6 top-6 rounded-full bg-coral px-3 py-1 text-xs font-semibold text-ink">Most popular</span>
+        <h3 class="text-lg font-semibold">Growth</h3><p class="mt-1 text-sm text-cream/65">For teams selling globally</p>
+        <p class="font-display mt-6 text-5xl font-semibold">$199<span class="text-base font-medium tracking-normal text-cream/65">/mo</span></p>
+        <ul class="mt-6 flex-1 space-y-3 text-[15px] text-cream/85"><li>10,000 conversations</li><li>All 60+ languages</li><li>CRM integrations</li><li>Human handoff</li></ul>
+        <a href="#cta" class="spring lift mt-8 rounded-full bg-coral px-6 py-3 text-center text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600">Choose Growth</a>
+      </div>
+      <div class="reveal flex flex-col rounded-3xl border border-ink/10 bg-cream p-8 shadow-raised">
+        <h3 class="text-lg font-semibold">Enterprise</h3><p class="mt-1 text-sm text-ink-500">For high-volume, regulated teams</p>
+        <p class="font-display mt-6 text-5xl font-semibold">Custom</p>
+        <ul class="mt-6 flex-1 space-y-3 text-[15px] text-ink-700"><li>Unlimited conversations</li><li>Data residency &amp; SSO</li><li>Dedicated success manager</li></ul>
+        <a href="#cta" class="spring lift mt-8 rounded-full border border-ink/15 bg-cream-50 px-6 py-3 text-center text-[15px] font-semibold hover:bg-white active:bg-cream-200">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="scroll-mt-20 px-5 py-24 sm:py-32">
+  <div class="grain reveal relative mx-auto max-w-6xl overflow-hidden rounded-[32px] px-8 py-16 text-center shadow-floating sm:px-16 sm:py-24" style="background:
+    radial-gradient(40rem 22rem at 85% 0%, rgba(255,122,89,.38), transparent 65%),
+    radial-gradient(34rem 20rem at 0% 100%, rgba(60,107,115,.85), transparent 65%), #0A2B32;">
+    <div class="relative z-10">
+      <h2 class="font-display mx-auto max-w-3xl text-4xl font-semibold text-cream-50 sm:text-6xl">Say hello to every customer, everywhere.</h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-cream/75">Start your 14-day free trial. No credit card, no setup call.</p>
+      <form class="mx-auto mt-9 flex max-w-md flex-col gap-3 sm:flex-row" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You’re on the list ✓';">
+        <label for="email" class="sr-only">Work email</label>
+        <input id="email" type="email" required placeholder="you@company.com" class="min-w-0 flex-1 rounded-full border border-cream/20 bg-cream/10 px-5 py-3.5 text-[15px] text-cream-50 placeholder:text-cream/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-coral">
+        <button type="submit" class="spring lift rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600">Start free trial</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-ink/10 bg-cream-50">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 sm:flex-row">
+    <img src="brand_assets/chatbot-global-logo.svg" alt="Chatbot Global" class="h-10 w-auto">
+    <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-500" aria-label="Footer">
+      <a href="#features" class="rounded hover:text-ink active:text-coral-600">Features</a>
+      <a href="#pricing" class="rounded hover:text-ink active:text-coral-600">Pricing</a>
+      <a href="#" class="rounded hover:text-ink active:text-coral-600">Privacy</a>
+      <a href="#" class="rounded hover:text-ink active:text-coral-600">Terms</a>
+    </nav>
+    <p class="text-sm text-ink-300">© 2026 Chatbot Global</p>
+  </div>
+</footer>
+
+<!-- Floating launcher: jumps to the demo chat -->
+<a id="launcher" href="#demo" class="spring lift fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-coral text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600" aria-label="Open chat demo">
+  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>
+</a>
+
+<script>
+  // Scroll reveals
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+
+  // Placeholder chatbot (scripted). Swap for a real widget at #chatbot-mount.
+  const log = document.getElementById('chat-scroll');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const chips = document.getElementById('chips');
+  const replies = [
+    [/price|cost|plan|pricing/i, 'Plans start at $49/mo, and Growth ($199/mo) unlocks all 60+ languages and CRM integrations. Want me to compare them?'],
+    [/language|translate|speak|idioma|langue/i, 'I support 60+ languages and switch automatically to match your visitor, including regional phrasing. Try typing in Español or Français!'],
+    [/human|agent|person|handoff/i, 'Whenever a customer asks, or I am unsure, I hand the chat to a human teammate along with the full transcript.'],
+    [/install|setup|start|integrat|website/i, 'Setup takes about an afternoon: connect your help center, set your tone, then paste one line of code on your site.'],
+    [/hola|bonjour|hallo|ciao|hello|hi\b|hey/i, 'Hello! 👋 I am Globa, the demo assistant for Chatbot Global. Ask me about languages, pricing or setup.']
+  ];
+  const suggestions = ['How many languages?', 'Show me pricing', 'How do I set it up?'];
+
+  function add(text, who) {
+    const d = document.createElement('div');
+    d.className = 'msg flex ' + (who === 'user' ? 'user justify-end' : '');
+    d.innerHTML = '<p class="max-w-[82%] rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed ' +
+      (who === 'user' ? 'rounded-br-md bg-ink text-cream-50 shadow-raised' : 'rounded-bl-md border border-ink/10 bg-white text-ink shadow-raised') + '"></p>';
+    d.firstChild.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
+  }
+  function typing() {
+    const d = document.createElement('div'); d.className = 'msg flex';
+    d.innerHTML = '<div class="flex gap-1 rounded-2xl rounded-bl-md border border-ink/10 bg-white px-4 py-3.5 shadow-raised"><span class="dot h-1.5 w-1.5 rounded-full bg-ink-500"></span><span class="dot h-1.5 w-1.5 rounded-full bg-ink-500"></span><span class="dot h-1.5 w-1.5 rounded-full bg-ink-500"></span></div>';
+    log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
+  }
+  function respond(text) {
+    const t = typing();
+    const hit = replies.find(r => r[0].test(text));
+    setTimeout(() => { t.remove(); add(hit ? hit[1] : 'Great question. This is a demo placeholder, so my answers are scripted. Try asking about languages, pricing or setup.', 'bot'); }, 800);
+  }
+  function send(text) { if (!text.trim()) return; add(text, 'user'); input.value = ''; respond(text); }
+
+  suggestions.forEach(s => {
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = s;
+    b.className = 'spring lift rounded-full border border-ink/15 bg-cream px-3.5 py-1.5 text-[13px] font-medium text-ink-700 hover:bg-cream-200 active:bg-cream-200';
+    b.addEventListener('click', () => send(s)); chips.appendChild(b);
+  });
+  form.addEventListener('submit', e => { e.preventDefault(); send(input.value); });
+  setTimeout(() => add('Hi! 👋 I am Globa, the demo assistant for Chatbot Global. I can answer in 60+ languages. What would you like to know?', 'bot'), 500);
+  document.getElementById('launcher').addEventListener('click', () => setTimeout(() => input.focus({ preventScroll: true }), 600));
+</script>
+</body>
+</html>

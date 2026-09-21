@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512" role="img" aria-label="Chatbot Global">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14525C"/>
+      <stop offset="1" stop-color="#0A2B32"/>
+    </linearGradient>
+    <clipPath id="globe"><circle cx="32" cy="29" r="19"/></clipPath>
+  </defs>
+  <!-- speech bubble -->
+  <path d="M32 3C16.5 3 4 14.7 4 29.2c0 8.2 4 15.5 10.3 20.3L11 60.5c-.3 1 .8 1.700 1.600 1.100L25.200 54c2.200.4 4.400.6 6.800.6 15.500 0 28-11.700 28-26.200S47.500 3 32 3Z" fill="url(#bg)"/>
+  <!-- globe -->
+  <g clip-path="url(#globe)" fill="none" stroke="#F4EFE6" stroke-width="1.800" stroke-linecap="round">
+    <circle cx="32" cy="29" r="19"/>
+    <ellipse cx="32" cy="29" rx="8.500" ry="19"/>
+    <path d="M13 29h38"/>
+    <path d="M16 20.500c10 3.500 22 3.500 32 0M16 37.500c10-3.500 22-3.500 32 0"/>
+  </g>
+  <!-- accent dot: the "bot" spark -->
+  <circle cx="47.500" cy="14.500" r="5" fill="#FF7A59"/>
+  <circle cx="47.500" cy="14.500" r="5" fill="none" stroke="#0A2B32" stroke-width="1.500"/>
+</svg>

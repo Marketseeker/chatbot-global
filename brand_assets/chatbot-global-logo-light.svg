@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" width="960" height="216" role="img" aria-label="Chatbot Global">
+  <defs>
+    <clipPath id="globe"><circle cx="32" cy="31" r="19"/></clipPath>
+  </defs>
+  <g transform="translate(0 2)">
+    <path d="M32 5C16.500 5 4 16.700 4 31.200c0 8.200 4 15.500 10.300 20.300L11 62.500c-.3 1 .8 1.700 1.600 1.100L25.200 56c2.200.4 4.400.6 6.800.6 15.500 0 28-11.700 28-26.200S47.500 5 32 5Z" fill="#F4EFE6" transform="translate(0 -2)"/>
+    <g clip-path="url(#globe)" fill="none" stroke="#0A2B32" stroke-width="1.800" stroke-linecap="round">
+      <circle cx="32" cy="31" r="19"/>
+      <ellipse cx="32" cy="31" rx="8.500" ry="19"/>
+      <path d="M13 31h38"/>
+      <path d="M16 22.500c10 3.500 22 3.500 32 0M16 39.500c10-3.500 22-3.500 32 0"/>
+    </g>
+    <circle cx="47.500" cy="16.500" r="5" fill="#FF7A59" stroke="#F4EFE6" stroke-width="1.500"/>
+  </g>
+  <text x="76" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" letter-spacing="-1" fill="#F4EFE6">Chatbot</text>
+  <text x="77" y="59" font-family="'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="7.500" fill="#FF7A59">GLOBAL</text>
+</svg>
