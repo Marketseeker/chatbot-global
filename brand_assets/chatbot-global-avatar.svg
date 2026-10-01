@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="256" height="256" role="img" aria-label="Chatbot Global assistant">
+  <defs>
+    <linearGradient id="bg" x1="16" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1B6572"/><stop offset="1" stop-color="#0A2B32"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.14" r="0.6">
+      <stop offset="0" stop-color="#FF7A59" stop-opacity=".45"/><stop offset="1" stop-color="#FF7A59" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c"><circle cx="64" cy="64" r="64"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="128" height="128" fill="url(#bg)"/>
+    <rect width="128" height="128" fill="url(#glow)"/>
+    <!-- speech-bubble face, same silhouette as the logo mark -->
+    <path d="M64 27c-21 0-38 15.600-38 34.800 0 10.800 5.400 20.500 13.900 26.900L35.500 102c-.4 1.300 1.100 2.300 2.200 1.500l17-11.800c3 .5 6.100.8 9.300.8 21 0 38-15.600 38-34.800S85 27 64 27Z" fill="#F4EFE6"/>
+    <!-- eyes -->
+    <ellipse cx="51" cy="60" rx="5" ry="6.200" fill="#0A2B32"/>
+    <ellipse cx="77" cy="60" rx="5" ry="6.200" fill="#0A2B32"/>
+    <circle cx="52.600" cy="57.800" r="1.600" fill="#F4EFE6"/>
+    <circle cx="78.600" cy="57.800" r="1.600" fill="#F4EFE6"/>
+    <!-- smile -->
+    <path d="M52 74c3.600 4.800 8.200 7 12 7s8.400-2.200 12-7" fill="none" stroke="#0A2B32" stroke-width="4" stroke-linecap="round"/>
+    <!-- cheeks -->
+    <circle cx="43" cy="72" r="4.200" fill="#FF7A59" opacity=".32"/>
+    <circle cx="85" cy="72" r="4.200" fill="#FF7A59" opacity=".32"/>
+    <!-- brand dot -->
+    <circle cx="94" cy="34" r="9" fill="#FF7A59" stroke="#0A2B32" stroke-width="3"/>
+  </g>
+</svg>

@@ -1,0 +1,96 @@
+/* Scrollcraft device rules only (no tokens/reset), so they coexist with Tailwind. */
+:root { --sc-ease-out: cubic-bezier(0.23, 1, 0.32, 1); --sc-accent: #FF7A59; --sc-z-stage: 1; --sc-z-copy: 20; --sc-z-chrome: 60; }
+.sc-act--pinned { position: relative; }
+.sc-stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: clip;
+  z-index: var(--sc-z-stage);
+}
+/* cue defaults: the engine writes opacity/transform inline, these are the
+   pre-paint state so nothing flashes before the first read() */
+[data-sc-cue] { opacity: 0; will-change: opacity, transform; }
+.sc-ready [data-sc-cue] { transition: none; }
+/* kinetic split */
+.sc-split { display: inline-block; overflow: hidden; vertical-align: top; }
+/* Descenders live below the baseline; a line mask clipped to the line box eats
+   the tails off g, y, p, j. The padding buys them room back. */
+.sc-split--line { display: block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.sc-split__i { display: inline-block; will-change: transform, opacity; }
+.sc-is-split { opacity: 1 !important; }
+/* reveal + parallax */
+[data-sc-reveal] { will-change: clip-path; }
+[data-sc-parallax] { will-change: transform; }
+
+/* flow reveal (fires once) */
+[data-sc-in], [data-sc-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 620ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
+}
+[data-sc-in].sc-in, [data-sc-stagger] > .sc-in { opacity: 1; transform: none; }
+/* pointer devices */
+[data-sc-tilt] { transform-style: preserve-3d; will-change: transform; }
+[data-sc-magnet] { will-change: transform; }
+/* isolation always; position only if nothing more specific already set it.
+   Written with :where() (zero specificity) on purpose: a plain `position:
+   relative` here has the same weight as `.sc-stage` and, being later in the
+   file, silently wins. A stage carrying both attributes then stops being
+   sticky and the whole act scrolls away instead of pinning. */
+[data-sc-spotlight] { isolation: isolate; }
+:where([data-sc-spotlight]) { position: relative; }
+[data-sc-spotlight]::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: radial-gradient(
+    28rem 28rem at calc(var(--sc-mx, 0.5) * 100%) calc(var(--sc-my, 0.5) * 100%),
+    color-mix(in oklab, var(--sc-accent) 16%, transparent), transparent 70%);
+  opacity: 0; transition: opacity var(--sc-d-slow) var(--sc-ease-out);
+}
+[data-sc-spotlight]:hover::after { opacity: 1; }
+/* scroll progress */
+[data-sc-progress] {
+  position: fixed; inset: 0 0 auto 0; height: 2px; z-index: var(--sc-z-chrome);
+  background: var(--sc-accent); transform-origin: 0 50%; transform: scaleX(0);
+  will-change: transform;
+}
+/* -------------------------------------------------------- reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  /* Fewer and gentler, not zero. Opacity still carries the reveal so the page
+     is comprehensible; every position change is dropped. */
+  [data-sc-in], [data-sc-stagger] > * { transform: none; transition-duration: 220ms; }
+  [data-sc-parallax], [data-sc-pan], .sc-split__i { transform: none !important; }
+  /* A wipe is a position change too. Show reveal content settled. */
+  [data-sc-reveal] { clip-path: none !important; }
+  /* A rail's transform IS its navigation, not decoration. Zeroing it the way
+     parallax and kinetic type are zeroed parks the act on its first screenful
+     and makes everything past the fold unreachable: a device degrading into
+     missing content. Hand the travel back to the reader as an ordinary scroll
+     region instead, so the same items are all still gettable without motion.
+     A build that would rather re-lay the rail out as a grid can still do that;
+     this is the floor, not the ceiling. */
+  [data-sc-act="pan"] .sc-stage,
+  [data-sc-act="pan"] [data-sc-stage] {
+    overflow-x: auto; overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+  [data-sc-pan] > * { scroll-snap-align: center; }
+  [data-sc-spotlight]::after { display: none; }
+}
+
+/* page-specific */
+.fx-grid {
+  background-image:
+    linear-gradient(to right, rgba(10,43,50,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10,43,50,.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(70% 60% at 50% 30%, #000 30%, transparent 78%);
+}
+.fx-orb { will-change: transform; border-radius: 50%; }
+/* Below desktop the how-it-works act is an ordinary section: no pin, steps always shown. */
+@media (max-width: 1023px) {
+  #how { height: auto !important; }
+  #how [data-sc-stage] { height: auto; position: relative; }
+  #how [data-sc-cue] { opacity: 1 !important; transform: none !important; }
+}

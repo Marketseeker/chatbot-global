@@ -5,3 +5,7 @@ serve.mjs
 screenshot.mjs
 CLAUDE.md
 .claude/
+scrollcraft/
+
+.env
+**/.env
