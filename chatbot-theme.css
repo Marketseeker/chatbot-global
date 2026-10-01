@@ -1,0 +1,163 @@
+/* ============================================================================
+   Chatbot Global: chat window theme
+   Matches the site: deep teal ink, cream surfaces, coral accent, Fraunces + DM Sans.
+
+   Where it goes:
+   - index.html already loads this file and injects it into the chat window, so
+     editing it here restyles the chat on the site.
+   - To use it inside SimpleBot's own "custom CSS" setting instead, paste the whole
+     file there. Every rule uses !important because the bot writes its own colors
+     inline (from your bot settings), and only !important beats inline styles.
+
+   Palette
+     ink        #0A2B32     ink-700  #14525C    ink-500  #3C6B73    ink-300  #8FB0B4
+     coral      #FF7A59     coral-600 #F2603C
+     cream      #F4EFE6     cream-50 #FBF8F2
+   ========================================================================== */
+
+.chat-form,
+.chat-form * {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+}
+
+/* window */
+.chat-window {
+  background: #FBF8F2 !important;
+  border-radius: 28px !important;
+}
+
+/* header: deep teal with the same two soft glows as the site's dark cards */
+.chat-header {
+  height: 64px !important;
+  padding: 0 20px !important;
+  border-bottom: 0 !important;
+  border-radius: 28px 28px 0 0 !important;
+  background:
+    radial-gradient(18rem 8rem at 100% 0%, rgba(255, 122, 89, .28), transparent 70%),
+    radial-gradient(14rem 8rem at 0% 100%, rgba(20, 82, 92, .9), transparent 70%),
+    #0A2B32 !important;
+  --header-title-color: #F4EFE6 !important;
+  --header-subtitle-color: rgba(244, 239, 230, .7) !important;
+  --header-icon-color: rgba(244, 239, 230, .7) !important;
+  --header-icon-hover-color: #F4EFE6 !important;
+  --header-icon-hover-bg: rgba(244, 239, 230, .12) !important;
+  --header-icon-active-bg: rgba(244, 239, 230, .18) !important;
+}
+.chat-header__avatar {
+  width: 36px !important;
+  height: 36px !important;
+  box-shadow: 0 0 0 1px rgba(244, 239, 230, .25) !important;
+}
+.chat-header__title {
+  color: #F4EFE6 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.005em !important;
+}
+.chat-header__subtitle { color: rgba(244, 239, 230, .7) !important; }
+.chat-header__btn { color: rgba(244, 239, 230, .7) !important; border-radius: 999px !important; }
+.chat-header__btn:hover { color: #F4EFE6 !important; background: rgba(244, 239, 230, .12) !important; }
+
+/* conversation area */
+.chat-message-list {
+  background:
+    radial-gradient(20rem 12rem at 100% 0%, rgba(255, 122, 89, .07), transparent 70%),
+    #FBF8F2 !important;
+  padding: 20px 16px !important;
+  scrollbar-width: thin;
+  scrollbar-color: #8FB0B4 transparent;
+}
+.chat-message__author { color: #3C6B73 !important; font-weight: 600 !important; }
+
+/* bot messages */
+.chat-message--received .chat-message__bubble {
+  background: #FFFFFF !important;
+  color: #0A2B32 !important;
+  border: 1px solid rgba(10, 43, 50, .1) !important;
+  border-radius: 18px 18px 18px 6px !important;
+  box-shadow: 0 1px 2px rgba(10, 43, 50, .06), 0 8px 24px -8px rgba(10, 43, 50, .14) !important;
+}
+/* visitor messages */
+.chat-message--sent .chat-message__bubble {
+  background: #0A2B32 !important;
+  color: #FBF8F2 !important;
+  border: 0 !important;
+  border-radius: 18px 18px 6px 18px !important;
+  box-shadow: 0 1px 2px rgba(10, 43, 50, .06), 0 8px 24px -8px rgba(10, 43, 50, .14) !important;
+}
+.chat-message__bubble { font-size: 15px !important; line-height: 1.55 !important; }
+
+/* links inside messages */
+.chat-text-link, .chat-link { color: #F2603C !important; text-underline-offset: 0.2em !important; }
+.chat-message--sent .chat-text-link, .chat-message--sent .chat-link { color: #FF7A59 !important; }
+
+/* typing dots */
+.chat-typing-indicator span, .chat-typing-dot { background: #3C6B73 !important; }
+
+/* suggested replies */
+.chat-suggestions__pill {
+  background: #F4EFE6 !important;
+  color: #14525C !important;
+  border: 1px solid rgba(10, 43, 50, .15) !important;
+  border-radius: 999px !important;
+  font-weight: 500 !important;
+  transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), background-color .15s ease !important;
+}
+.chat-suggestions__pill:hover { background: #EAE3D5 !important; transform: translateY(-2px) !important; }
+.chat-suggestions__pill:active { transform: scale(.97) !important; }
+
+/* footer + input */
+.chat-window__footer {
+  background: #FBF8F2 !important;
+  border-top: 1px solid rgba(10, 43, 50, .1) !important;
+}
+.chat-input-area { background: transparent !important; }
+.chat-input {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(10, 43, 50, .15) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 1px 2px rgba(10, 43, 50, .06), 0 8px 24px -8px rgba(10, 43, 50, .14) !important;
+  padding-left: 16px !important;
+}
+.chat-input:focus-within {
+  border-color: #FF7A59 !important;
+  box-shadow: 0 0 0 3px rgba(255, 122, 89, .25) !important;
+}
+.chat-input__text { color: #0A2B32 !important; font-size: 15px !important; }
+.chat-input__text:empty::before { color: #8FB0B4 !important; }
+
+/* send button: coral, like every primary button on the site */
+.chat-input__send {
+  background: #FF7A59 !important;
+  color: #0A2B32 !important;
+  border-radius: 999px !important;
+  box-shadow: 0 1px 2px rgba(242, 96, 60, .35), 0 10px 24px -8px rgba(255, 122, 89, .55) !important;
+  transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), background-color .15s ease !important;
+}
+.chat-input__send:hover { background: #F2603C !important; color: #FBF8F2 !important; transform: translateY(-1px) !important; }
+.chat-input__send:active { transform: scale(.94) !important; }
+.chat-input__send:focus-visible, .chat-header__btn:focus-visible, .chat-suggestions__pill:focus-visible {
+  outline: 2px solid #FF7A59 !important;
+  outline-offset: 3px !important;
+}
+
+/* "Chatbot Global" credit line */
+.chat-powered-by__link, .chat-powered-by__text { color: #8FB0B4 !important; }
+.chat-powered-by__link:hover { color: #3C6B73 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-suggestions__pill, .chat-input__send { transition: none !important; }
+}
+
+/* the credit strip under the input */
+.chat-powered-by { background: #FBF8F2 !important; padding-bottom: 8px !important; }
+
+/* avatar: our own picture instead of the platform default.
+   If you paste this file into SimpleBot's CSS box, change the url() to the full
+   address of the image on your site (for example https://yourdomain.com/brand_assets/...). */
+.chat-header__avatar,
+.chat-message__avatar {
+  background: url("brand_assets/chatbot-global-avatar.webp") center / cover no-repeat !important;
+  border-radius: 999px !important;
+}
+.chat-header__avatar img { opacity: 0 !important; }
