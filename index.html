@@ -103,7 +103,7 @@ tailwind.config = {
       <a href="#industries" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Who it's for</a>
     </nav>
     <div class="flex items-center gap-2">
-      <a href="#demo" class="spring lift hidden rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-ink/5 active:bg-ink/10 sm:inline-block">Try the demo</a>
+      <button type="button" data-open-chat class="spring lift hidden rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral active:bg-ink/10 sm:inline-block">Try the demo</button>
       <a href="#cta" class="spring lift rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-cream-50 shadow-raised hover:bg-ink-700 active:bg-ink">Get started</a>
     </div>
   </div>
@@ -133,10 +133,10 @@ tailwind.config = {
         Chatbot Global deploys AI assistants that greet, qualify and support your customers in their own language, on your website, 24 hours a day, with a human handoff whenever it matters.
       </p>
       <div class="reveal mt-9 flex flex-wrap items-center gap-3">
-        <a href="#demo" class="spring lift inline-flex items-center gap-2 rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600">
+        <button type="button" data-open-chat class="spring lift inline-flex items-center gap-2 rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:bg-coral-600">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg>
           Chat with the assistant
-        </a>
+        </button>
       </div>
       <dl class="reveal mt-12 flex flex-wrap gap-x-10 gap-y-5 border-t border-ink/10 pt-7">
         <div><dt class="sr-only">Language</dt><dd class="font-display text-3xl font-semibold tracking-tight">Auto</dd><p class="text-sm text-ink-500">language detection</p></div>
@@ -145,11 +145,20 @@ tailwind.config = {
       </dl>
     </div>
 
-    <!-- DEMO CHATBOT PLACEHOLDER -->
+    <!-- DEMO PANEL: the live assistant is the corner chat icon (chat_plugin.js); this panel explains the demo and opens it -->
     <div id="demo" class="reveal relative mx-auto w-full max-w-md scroll-mt-28 lg:ml-auto">
-      <!-- Live chatbot: SimpleBot renders into #chat_form and fills this card -->
-      <div id="chatbot-mount" class="relative h-[34rem] overflow-hidden rounded-[28px] border border-ink/10 bg-cream-50 shadow-floating sm:h-[36rem]">
-        <div id="chat_form" class="h-full w-full"></div>
+      <div class="rounded-[28px] border border-ink/10 bg-cream-50 p-7 shadow-floating sm:p-9">
+        <p class="text-[13px] font-semibold uppercase tracking-[.18em] text-coral-600">Free demo</p>
+        <h2 class="font-display mt-3 text-3xl font-semibold tracking-tight text-ink">See a chatbot built for your website</h2>
+        <ol class="mt-7 space-y-5">
+          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-sm font-semibold text-cream-50">1</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Open the chat</span> and tell the assistant about your business.</p></li>
+          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-sm font-semibold text-cream-50">2</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Share your website</span> and the email to send it to.</p></li>
+          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-coral text-sm font-semibold text-ink">3</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Get a demo page</span> styled like your site, emailed to you in about 2 minutes.</p></li>
+        </ol>
+        <button type="button" data-open-chat class="spring lift mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-raised hover:bg-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50 active:bg-ink">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>
+          Open the chat
+        </button>
       </div>
     </div>
   </div>
@@ -265,7 +274,7 @@ tailwind.config = {
     <div class="relative z-10">
       <h2 class="font-display mx-auto max-w-3xl text-4xl font-semibold text-cream-50 sm:text-6xl">Get a free chatbot. Pay only for leads.</h2>
       <p class="mx-auto mt-5 max-w-xl text-lg text-cream/75">Tell the assistant about your business and get a real demo page built in your site's style.</p>
-      <a href="#demo" data-sc-magnet="0.26" class="spring press mt-9 inline-block rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600">Chat with the assistant</a>
+      <button type="button" data-open-chat data-sc-magnet="0.26" class="spring press mt-9 inline-block rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream-50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:bg-coral-600">Chat with the assistant</button>
     </div>
   </div>
 </section>
@@ -286,13 +295,9 @@ tailwind.config = {
   </div>
 </footer>
 
-<!-- Floating launcher: jumps to the demo chat -->
-<a id="launcher" href="#demo" class="spring lift fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-coral text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 active:bg-coral-600" aria-label="Open chat demo">
-  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>
-</a>
-
 <script src="scrollcraft.js"></script>
-<script src="https://platform.simplebotinstall.com/w/chat_form_plugin.js" data-bot-id="3791"></script>
+<!-- Live assistant: floating chat icon in the bottom-right corner -->
+<script src="https://platform.simplebotinstall.com/w/chat_plugin.js" data-bot-id="3791"></script>
 <script>ScrollCraft.mount(document.body);</script>
 <script>
   // Scroll reveals
@@ -301,14 +306,17 @@ tailwind.config = {
 
 </script>
 <script>
-  // Theme the chat window: the bot renders in a shadow root, so page CSS cannot reach it.
-  // chatbot-theme.css is injected into that root once it exists.
-  fetch('chatbot-theme.css').then(function (r) { return r.text(); }).then(function (css) {
-    var tries = 0, t = setInterval(function () {
-      var sr = document.getElementById('chat_form').shadowRoot;
-      if (sr) { var st = document.createElement('style'); st.textContent = css; sr.appendChild(st); clearInterval(t); }
-      else if (++tries > 50) clearInterval(t);
-    }, 200);
+  // "Chat with the assistant" buttons open the corner chat. The widget has no public API, so click
+  // its launcher inside its shadow root, and only when the chat window isn't already open.
+  function openChat(tries) {
+    var host = document.getElementById('widget-chat-host');
+    var sr = host && host.shadowRoot;
+    var launcher = sr && sr.querySelector('.chat-launcher');
+    if (!launcher) { if ((tries || 0) < 25) setTimeout(function () { openChat((tries || 0) + 1); }, 200); return; }
+    if (!sr.querySelector('.chat-window--open')) launcher.click();
+  }
+  document.querySelectorAll('[data-open-chat]').forEach(function (b) {
+    b.addEventListener('click', function (e) { e.preventDefault(); openChat(0); });
   });
 </script>
 </body>
