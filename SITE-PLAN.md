@@ -19,7 +19,7 @@ The full business plan lives in a separate project: `C:\Users\Alfred Johnson\Doc
 - Do not publish a specific per-lead price until the owner confirms one.
 
 ## Home page chatbot (centerpiece)
-The home page is built around a live assistant chatbot (SimpleBot embed, bot 3791), not a static brochure. Confirmed flow (owner, 2026-10-01):
+The home page is built around a live assistant chatbot (SimpleBot embed, bot 3791), not a static brochure. Since 2026-10-21 it is a floating corner chat icon (`chat_plugin.js`), not an in-page chat card, so it is visible without scrolling. Every "Chat with the assistant" / "Try the demo" button carries `data-open-chat` and opens that corner chat. The hero's right column is a short "Free demo" panel explaining the three steps. Confirmed flow (owner, 2026-10-01):
 - Visitor chats with the assistant for all questions (free bot, pay per lead).
 - Visitor shares their website and email in the chat.
 - An n8n flow, triggered from the bot, scrapes the visitor's site and builds a REAL demo page: a working page styled like their site with a chatbot filled with carpet cleaning knowledge, not just a recolored widget.
@@ -95,10 +95,11 @@ Note: the existing `index.html` is an earlier generic "multilingual support chat
 - Home page centers on a live chatbot that offers a demo in the visitor's own site style and shows autonomous actions (follow-up email, auto-created demo bot). Headline: free chatbot so you never miss a customer.
 - Core message is risk-free, proof first: the client gets a lead before we get paid.
 - The site does not mention a guaranteed number of leads, and does not mention website, SEO, or other add-on services. Those upsells go in a follow-up email after leads are delivered.
+- The chatbot is a floating corner icon (SimpleBot `chat_plugin.js`), replacing the in-page chat card and the coral #launcher button. The owner did not like having to scroll to reach the card. Decided 2026-10-21.
 
 ## Open questions
 0b. Original index.html copy conflicts with this plan: pricing tiers, 60+ languages, and invented stats/testimonial/logos. Rewrite to the free-chatbot, pay-per-lead message when the owner says go.
-0a. RESOLVED 2026-09-24: the home chat is the owner's SimpleBot embed (script https://platform.simplebotinstall.com/w/chat_form_plugin.js, data-bot-id 3791, renders into <div id="chat_form">). Greeting text, colors and flow are edited in the bot platform, not on the site. Open: does the bot itself collect website/business/email/phone and send the follow-up email and build the demo bot?
+0a. RESOLVED 2026-09-24, updated 2026-10-21: the home chat is the owner's SimpleBot corner widget (script https://platform.simplebotinstall.com/w/chat_plugin.js, data-bot-id 3791; it renders its own #widget-chat-host in a shadow root). The earlier in-page version used chat_form_plugin.js with <div id="chat_form">. Greeting text, colors and flow are edited in the bot platform, not on the site. Open: does the bot itself collect website/business/email/phone and send the follow-up email and build the demo bot?
 0. Does the home page still use industry tabs, or is it now a single pay-per-lead pitch that links to the carpet page? (Tabs were discussed earlier; confirm.)
 1. Who is the primary carpet-cleaning buyer?
 2. What exactly does the bot do?
