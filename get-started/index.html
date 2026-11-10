@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Your Free Chatbot | Chatbot Global</title>
+<meta name="description" content="Sign up for a free chatbot for your service business. We email you a code, you add it to your website, and it's up and running the same day.">
+<link rel="icon" type="image/svg+xml" href="../brand_assets/chatbot-global-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0A2B32; --ink-700:#14525C; --ink-500:#3C6B73; --coral:#F2603C; --coral-600:#D9472A; --cream:#F4EFE6; --cream-50:#FBF8F2; --line:rgba(10,43,50,.14); }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'DM Sans',system-ui,sans-serif; line-height:1.7; background:var(--cream); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  header { border-bottom:1px solid rgba(10,43,50,.1); background:var(--cream-50); }
+  .bar { max-width:46rem; margin:0 auto; padding:1rem 1.25rem; display:flex; justify-content:space-between; align-items:center; }
+  .bar a { color:var(--ink); text-decoration:none; font-weight:600; }
+  .bar a:hover { color:var(--coral); }
+  main { max-width:46rem; margin:0 auto; padding:3rem 1.25rem 5rem; }
+  h1,h2 { font-family:'Fraunces',Georgia,serif; letter-spacing:-.03em; line-height:1.1; }
+  h1 { font-size:clamp(2.2rem,6vw,3.25rem); margin:0 0 .75rem; }
+  .lead { color:var(--ink-500); font-size:1.15rem; margin:0 0 1.5rem; }
+  .steps { list-style:none; padding:0; margin:0 0 2.25rem; display:grid; gap:.6rem; }
+  .steps li { display:flex; gap:.75rem; align-items:baseline; color:var(--ink-500); font-size:1.05rem; }
+  .steps b { flex:none; width:1.6rem; height:1.6rem; border-radius:50%; background:var(--coral); color:var(--ink); font-size:.85rem; display:inline-flex; align-items:center; justify-content:center; }
+  .card { background:var(--cream-50); border:1px solid var(--line); border-radius:24px; padding:2rem 1.5rem; box-shadow:0 1px 2px rgba(10,43,50,.04), 0 12px 32px -12px rgba(10,43,50,.18); }
+  @media (min-width:640px) { .card { padding:2.5rem; } }
+  .grid { display:grid; gap:1.1rem; }
+  @media (min-width:640px) { .two { grid-template-columns:1fr 1fr; } }
+  label, legend { display:block; font-weight:600; font-size:.95rem; margin-bottom:.35rem; }
+  .opt { font-weight:400; color:var(--ink-500); }
+  input[type=text], input[type=email], input[type=url], input[type=tel], select { width:100%; font:inherit; font-size:1rem; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:12px; padding:.8rem 1rem; transition:border-color .15s, box-shadow .15s; }
+  input:hover, select:hover { border-color:rgba(10,43,50,.3); }
+  input:focus-visible, select:focus-visible { outline:none; border-color:var(--ink-700); box-shadow:0 0 0 3px rgba(242,96,60,.35); }
+  fieldset { border:0; padding:0; margin:0; }
+  .choices { display:flex; flex-wrap:wrap; gap:.5rem; }
+  .choices label { font-weight:500; margin:0; display:inline-flex; align-items:center; gap:.45rem; background:#fff; border:1px solid var(--line); border-radius:999px; padding:.5rem 1rem; cursor:pointer; }
+  .choices label:hover { border-color:rgba(10,43,50,.3); }
+  .choices input { accent-color:var(--coral); }
+  .choices label:has(input:checked) { border-color:var(--coral); background:#FFF1EC; }
+  .choices label:has(input:focus-visible) { box-shadow:0 0 0 3px rgba(242,96,60,.35); }
+  .hint { color:var(--ink-500); font-size:.9rem; margin:.35rem 0 0; }
+  .err { color:var(--coral-600); font-size:.9rem; font-weight:600; margin:.35rem 0 0; min-height:0; }
+  .hidden { display:none; }
+  button { font:inherit; font-weight:600; font-size:1.05rem; width:100%; border:0; border-radius:999px; padding:1rem 1.5rem; background:var(--coral); color:var(--ink); cursor:pointer; box-shadow:0 8px 20px -8px rgba(242,96,60,.7); transition:transform .15s, background-color .15s, color .15s; }
+  button:hover { background:var(--coral-600); color:var(--cream-50); }
+  button:active { transform:translateY(1px); }
+  button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+  button:disabled { opacity:.6; cursor:wait; }
+  .fine { color:var(--ink-500); font-size:.88rem; margin:1rem 0 0; text-align:center; }
+  .fine a { color:var(--ink-700); }
+  #status { margin:1rem 0 0; font-weight:600; text-align:center; }
+  .done { text-align:center; padding:1rem 0; }
+  .done h2 { font-size:1.9rem; margin:0 0 .5rem; }
+  .done p { color:var(--ink-500); font-size:1.05rem; margin:.5rem 0; }
+  .demo { margin-top:2.5rem; text-align:center; color:var(--ink-500); }
+  .demo a { color:var(--ink-700); font-weight:600; }
+  :focus-visible { outline:2px solid #FF7A59; outline-offset:3px; }
+  footer { border-top:1px solid rgba(10,43,50,.1); background:var(--cream-50); text-align:center; padding:1.75rem 1.25rem; font-size:.9rem; color:var(--ink-500); }
+  footer a { color:var(--ink-500); }
+</style>
+</head>
+<body>
+<header><div class="bar"><a href="/">&larr; Chatbot Global</a><a href="/privacy/">Privacy</a></div></header>
+
+<main>
+  <h1>Get your free chatbot</h1>
+  <p class="lead">A chatbot for your website that answers customers and takes their details while you're on the job. It's free.</p>
+
+  <ol class="steps">
+    <li><b>1</b>Tell us about your business below.</li>
+    <li><b>2</b>We email you a code for your chatbot.</li>
+    <li><b>3</b>Add the code to your website, and it's up and running the same day.</li>
+  </ol>
+
+  <div class="card">
+    <form id="signup" novalidate>
+      <div class="grid">
+        <div class="grid two">
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+            <p class="err" id="name-err" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@yourcompany.com" required>
+            <p class="err" id="email-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div>
+            <label for="business">Business name</label>
+            <input id="business" name="business" type="text" autocomplete="organization" required>
+            <p class="err" id="business-err" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" autocomplete="url" inputmode="url" placeholder="yourcompany.com" required>
+            <p class="err" id="website-err" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div>
+          <label for="service">Your kind of service</label>
+          <select id="service" name="service" required>
+            <option value="">Choose one</option>
+          </select>
+          <p class="err" id="service-err" aria-live="polite"></p>
+        </div>
+
+        <div id="other-wrap" class="hidden">
+          <label for="other">What service?</label>
+          <input id="other" name="other" type="text" autocomplete="off">
+          <p class="err" id="other-err" aria-live="polite"></p>
+        </div>
+
+        <fieldset>
+          <legend>Can you or someone on your team edit your website?</legend>
+          <div class="choices">
+            <label><input type="radio" name="canEdit" value="yes"> Yes</label>
+            <label><input type="radio" name="canEdit" value="no"> No</label>
+            <label><input type="radio" name="canEdit" value="not sure"> Not sure</label>
+          </div>
+          <p class="hint">The chatbot is added to your website with a short code. If you're not sure, we'll help.</p>
+          <p class="err" id="canEdit-err" aria-live="polite"></p>
+        </fieldset>
+
+        <div>
+          <label for="phone">Phone <span class="opt">(optional)</span></label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+        </div>
+
+        <button type="submit" id="send">Get my free chatbot</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <p class="fine">We use your details to set up your chatbot and email you about it. See our <a href="/privacy/">privacy policy</a>.</p>
+    </form>
+
+    <div id="done" class="done hidden" tabindex="-1">
+      <h2>You're all set</h2>
+      <p>Thanks, <span id="done-name"></span>! We'll email your chatbot code to <b id="done-email"></b>.</p>
+      <p>Add it to your website and it's up and running the same day.</p>
+    </div>
+  </div>
+
+  <p class="demo">Want to try one first? <a href="/">Chat with our assistant</a> or ask for a demo on the home page.</p>
+</main>
+
+<footer>&copy; 2026 Chatbot Global &middot; <a href="/privacy/">Privacy</a></footer>
+
+<script>
+(function () {
+  var SIGNUP_WEBHOOK = window.SIGNUP_WEBHOOK || 'https://n8n.chatbotglobal.com/webhook/signup';
+  // Keep in sync with demo-request.js and 08-Aminos/demo-services.md.
+  var SERVICES = [
+    'Appliance repair', 'Auto detailing', 'Carpet cleaning', 'Electrical', 'Garage door repair',
+    'Handyman', 'House cleaning', 'HVAC', 'Junk removal', 'Landscaping', 'Locksmith', 'Moving',
+    'Painting', 'Pest control', 'Plumbing', 'Pool service', 'Roofing', 'Tree service',
+    'Water damage restoration', 'Window cleaning & pressure washing', 'Other'
+  ];
+  var form = document.getElementById('signup');
+  var svc = document.getElementById('service');
+  var otherWrap = document.getElementById('other-wrap');
+  var other = document.getElementById('other');
+  var send = document.getElementById('send');
+  var status = document.getElementById('status');
+
+  SERVICES.forEach(function (s) { var o = document.createElement('option'); o.value = s; o.textContent = s; svc.appendChild(o); });
+  // A demo page can pass ?service=HVAC to preselect it.
+  var pre = new URLSearchParams(location.search).get('service');
+  if (pre) { var m = SERVICES.find(function (s) { return s.toLowerCase() === pre.toLowerCase(); }); if (m) svc.value = m; }
+
+  svc.addEventListener('change', function () {
+    var isOther = svc.value === 'Other';
+    otherWrap.classList.toggle('hidden', !isOther);
+    if (isOther) other.focus();
+  });
+
+  function setErr(id, msg) { var e = document.getElementById(id + '-err'); if (e) e.textContent = msg || ''; }
+  form.addEventListener('input', function (e) { if (e.target.name) setErr(e.target.name, ''); });
+  form.addEventListener('change', function (e) { if (e.target.name) setErr(e.target.name, ''); });
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.textContent = '';
+    var canEditEl = form.querySelector('input[name=canEdit]:checked');
+    var data = {
+      name: val('name'), email: val('email').toLowerCase(), business: val('business'),
+      website: val('website'), service: svc.value === 'Other' ? val('other') : svc.value,
+      canEdit: canEditEl ? canEditEl.value : '', phone: val('phone'),
+      page: location.pathname + location.search, requestedAt: new Date().toISOString()
+    };
+    var first = null;
+    function bad(id, msg) { setErr(id, msg); if (!first) first = document.getElementById(id) || form.querySelector('input[name=' + id + ']'); }
+    if (!data.name) bad('name', 'Please enter your name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) bad('email', 'Please enter a valid email address.');
+    if (!data.business) bad('business', 'Please enter your business name.');
+    if (!/^\S+\.\S+$/.test(data.website)) bad('website', 'Please enter your website, for example yourcompany.com.');
+    if (!svc.value) bad('service', 'Please choose your kind of service.');
+    else if (svc.value === 'Other' && !data.service) bad('other', 'Please tell us your kind of service.');
+    if (!data.canEdit) bad('canEdit', 'Please choose one.');
+    if (first) { first.focus(); return; }
+
+    send.disabled = true; status.style.color = ''; status.textContent = 'Sending…';
+    fetch(SIGNUP_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { if (!r.ok) throw new Error('status ' + r.status); })
+      .then(function () {
+        document.getElementById('done-name').textContent = data.name.split(' ')[0];
+        document.getElementById('done-email').textContent = data.email;
+        form.classList.add('hidden');
+        var done = document.getElementById('done'); done.classList.remove('hidden'); done.focus();
+        if (typeof gtag === 'function') gtag('event', 'sign_up', { service: data.service });
+      })
+      .catch(function () {
+        status.style.color = 'var(--coral-600)';
+        status.textContent = 'Sorry, that didn’t go through. Please try again in a moment.';
+      })
+      .then(function () { send.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

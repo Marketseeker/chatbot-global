@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chatbot Global | AI chat that speaks your customers' language</title>
-<meta name="description" content="Get a free chatbot for your business so you never miss another customer. You pay only after you get a lead.">
+<title>Chatbot Global | Free Chatbot for Service Companies</title>
+<meta name="description" content="Get a free chatbot for your business so you never miss another customer. We email you a code, you add it to your site, and it’s running the same day.">
 <link rel="icon" type="image/svg+xml" href="brand_assets/chatbot-global-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,10 +62,13 @@ tailwind.config = {
   @keyframes blink { 0%,80%,100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
   .float { animation: float 7s ease-in-out infinite; }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .hw { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+  .hw > span { display: inline-block; transform: translateY(105%); animation: hw-up .9s cubic-bezier(.22,1,.36,1) forwards; animation-delay: calc(var(--i) * 70ms + 150ms); }
+  @keyframes hw-up { to { transform: none; } }
   .chat-panel { transform-origin: bottom right; }
   .chat-panel[data-open="false"] { opacity: 0; transform: translateY(16px) scale(.92); pointer-events: none; }
   #chat-scroll { scrollbar-width: thin; scrollbar-color: #8FB0B4 transparent; }
-  @media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } .hw > span { transform: none; } }
 </style>
 <link rel="stylesheet" href="scroll-effects.css">
 <!-- Google tag (gtag.js) -->
@@ -99,11 +102,11 @@ tailwind.config = {
     <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
       <a href="#features" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">What it does</a>
       <a href="#how" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">How it works</a>
-      <a href="#pay" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">No risk</a>
+      <a href="#free" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Free</a>
       <a href="#industries" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Who it's for</a>
     </nav>
     <div class="flex items-center gap-2">
-      <button type="button" data-open-chat class="spring lift hidden rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral active:bg-ink/10 sm:inline-block">Try the demo</button>
+      <button type="button" data-open-chat class="spring lift hidden rounded-full px-4 py-2 text-sm font-medium text-ink hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral active:bg-ink/10 sm:inline-block">Talk to the assistant</button>
       <a href="#cta" class="spring lift rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-cream-50 shadow-raised hover:bg-ink-700 active:bg-ink">Get started</a>
     </div>
   </div>
@@ -124,36 +127,37 @@ tailwind.config = {
   <div class="relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-5 lg:grid-cols-[1.05fr_.95fr] lg:gap-10">
     <div>
       <p class="reveal spring inline-flex items-center gap-2 rounded-full border border-ink/10 bg-cream-50/70 px-3.5 py-1.5 text-[13px] font-medium text-ink-700 shadow-raised">
-        <span class="h-2 w-2 rounded-full bg-coral"></span> Replies in your customer's language
+        <span class="h-2 w-2 rounded-full bg-coral"></span> For service companies
       </p>
-      <h1 class="reveal font-display mt-6 text-[clamp(2.75rem,7vw,5.5rem)] font-semibold text-ink">
-        Conversations that <em class="not-italic text-coral-600">cross every border.</em>
+      <h1 data-hero-words class="font-display mt-6 text-[clamp(2.75rem,7vw,5.5rem)] font-semibold text-ink">
+        Get a free chatbot so you <em class="not-italic text-coral-600">never miss another customer.</em>
       </h1>
       <p class="reveal mt-6 max-w-xl text-lg text-ink-500">
-        Chatbot Global deploys AI assistants that greet, qualify and support your customers in their own language, on your website, 24 hours a day, with a human handoff whenever it matters.
+        It answers the people on your website any hour of the day, even when you're out on a job. It’s free. We email you a code, you add it to your site, and it’s up and running the same day.
       </p>
       <div class="reveal mt-9 flex flex-wrap items-center gap-3">
-        <button type="button" data-open-chat class="spring lift inline-flex items-center gap-2 rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:bg-coral-600">
+        <button type="button" data-open-chat data-sc-magnet="0.3" class="spring lift inline-flex items-center gap-2 rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:bg-coral-600">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.500 4.640A1 1 0 0 0 8 5.500Z"/></svg>
           Chat with the assistant
         </button>
+        <button type="button" data-open-demo class="spring lift inline-flex items-center gap-2 rounded-full border border-ink/15 bg-cream-50/70 px-6 py-3.5 text-[15px] font-semibold text-ink shadow-raised hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral active:bg-cream-200">Get a demo by email</button>
       </div>
       <dl class="reveal mt-12 flex flex-wrap gap-x-10 gap-y-5 border-t border-ink/10 pt-7">
         <div><dt class="sr-only">Language</dt><dd class="font-display text-3xl font-semibold tracking-tight">Auto</dd><p class="text-sm text-ink-500">language detection</p></div>
         <div><dt class="sr-only">Cost</dt><dd class="font-display text-3xl font-semibold tracking-tight">Free</dd><p class="text-sm text-ink-500">to get started</p></div>
-        <div><dt class="sr-only">Billing</dt><dd class="font-display text-3xl font-semibold tracking-tight">Per lead</dd><p class="text-sm text-ink-500">pay only after a lead</p></div>
+        <div><dt class="sr-only">Availability</dt><dd class="font-display text-3xl font-semibold tracking-tight">24/7</dd><p class="text-sm text-ink-500">answers your visitors</p></div>
       </dl>
     </div>
 
-    <!-- DEMO PANEL: the live assistant is the corner chat icon (chat_plugin.js); this panel explains the demo and opens it -->
+    <!-- DEMO PANEL: the live assistant is the corner chat icon (chat_plugin.js); this panel explains how to get the chatbot and opens it -->
     <div id="demo" class="reveal relative mx-auto w-full max-w-md scroll-mt-28 lg:ml-auto">
-      <div class="rounded-[28px] border border-ink/10 bg-cream-50 p-7 shadow-floating sm:p-9">
-        <p class="text-[13px] font-semibold uppercase tracking-[.18em] text-coral-600">Free demo</p>
-        <h2 class="font-display mt-3 text-3xl font-semibold tracking-tight text-ink">See a chatbot built for your website</h2>
+      <div data-sc-tilt="5" data-sc-spotlight class="rounded-[28px] border border-ink/10 bg-cream-50 p-7 shadow-floating sm:p-9">
+        <p class="text-[13px] font-semibold uppercase tracking-[.18em] text-coral-600">Free chatbot</p>
+        <h2 class="font-display mt-3 text-3xl font-semibold tracking-tight text-ink">Live on your site the same day</h2>
         <ol class="mt-7 space-y-5">
           <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-sm font-semibold text-cream-50">1</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Open the chat</span> and tell the assistant about your business.</p></li>
-          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-sm font-semibold text-cream-50">2</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Share your website</span> and the email to send it to.</p></li>
-          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-coral text-sm font-semibold text-ink">3</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Get a demo page</span> styled like your site, emailed to you in about 2 minutes.</p></li>
+          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink text-sm font-semibold text-cream-50">2</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Share your details</span> so we know where to email your code.</p></li>
+          <li class="flex gap-4"><span class="font-display grid h-9 w-9 shrink-0 place-items-center rounded-full bg-coral text-sm font-semibold text-ink">3</span><p class="pt-1.5 text-ink-500"><span class="font-semibold text-ink">Add the code to your site.</span> It’s up and running that day.</p></li>
         </ol>
         <button type="button" data-open-chat class="spring lift mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-raised hover:bg-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50 active:bg-ink">
           <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>
@@ -164,11 +168,11 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- NO-RISK STRIP -->
-<section class="border-y border-ink/10 bg-cream-50" aria-label="How you pay">
+<!-- FREE STRIP -->
+<section class="border-y border-ink/10 bg-cream-50" aria-label="Cost">
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-7 text-center sm:flex-row sm:text-left">
-    <p class="font-display text-2xl font-semibold sm:text-3xl">The chatbot is free. <span class="text-coral-600">You pay only after you get a lead.</span></p>
-    <a href="#pay" class="spring lift shrink-0 rounded-full border border-ink/15 bg-cream px-5 py-2.5 text-sm font-semibold text-ink shadow-raised hover:bg-white active:bg-cream-200">How billing works</a>
+    <p class="font-display text-2xl font-semibold sm:text-3xl">The chatbot is free. <span class="text-coral-600">Live on your site the same day.</span></p>
+    <button type="button" data-open-demo class="spring lift shrink-0 rounded-full border border-ink/15 bg-cream px-5 py-2.5 text-sm font-semibold text-ink shadow-raised hover:bg-white active:bg-cream-200">Get a demo by email</button>
   </div>
 </section>
 
@@ -193,17 +197,17 @@ tailwind.config = {
       <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
         <div class="grid h-12 w-12 place-items-center rounded-2xl bg-ink/5 text-ink-700"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8l9 9Z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></div>
         <h3 class="font-display mt-6 text-2xl font-semibold">Free to start</h3>
-        <p class="mt-3 text-ink-500">The chatbot itself costs nothing. No plans to choose from.</p>
+        <p class="mt-3 text-ink-500">The chatbot costs nothing to get. No plans to choose from.</p>
       </article>
       <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
         <div class="grid h-12 w-12 place-items-center rounded-2xl bg-ink/5 text-ink-700"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/></svg></div>
-        <h3 class="font-display mt-6 text-2xl font-semibold">A real demo, built for you</h3>
-        <p class="mt-3 text-ink-500">Share your website and email, and get back a working demo page styled like your site, with a chatbot trained on your business.</p>
+        <h3 class="font-display mt-6 text-2xl font-semibold">Up the same day</h3>
+        <p class="mt-3 text-ink-500">We email you a code. Add it to your site and the chatbot is running that day.</p>
       </article>
       <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised md:col-span-2">
         <div class="grid h-12 w-12 place-items-center rounded-2xl bg-ink/5 text-ink-700"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></div>
-        <h3 class="font-display mt-6 text-2xl font-semibold">Follows up for you</h3>
-        <p class="mt-3 text-ink-500">Sends the follow-up email automatically, so nothing waits on you.</p>
+        <h3 class="font-display mt-6 text-2xl font-semibold">Leads in your inbox</h3>
+        <p class="mt-3 text-ink-500">Each lead comes to you by email, ready for you to call back.</p>
       </article>
     </div>
   </div>
@@ -218,33 +222,52 @@ tailwind.config = {
       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
       <div class="absolute bottom-5 left-5 right-5 rounded-2xl bg-cream-50/90 p-4 shadow-floating backdrop-blur">
         <p class="text-xs font-semibold uppercase tracking-wider text-ink-500">Free to start</p>
-        <p class="font-display text-2xl font-semibold">Pay only after you get a lead</p>
+        <p class="font-display text-2xl font-semibold">A chatbot that answers for you</p>
       </div>
     </div>
     <div>
       <p class="reveal text-sm font-semibold uppercase tracking-[.2em] text-coral-600">How it works</p>
-      <h2 class="reveal font-display mt-4 text-4xl font-semibold sm:text-5xl">From your website to a working bot.</h2>
+      <h2 class="reveal font-display mt-4 text-4xl font-semibold sm:text-5xl">From first chat to finished job.</h2>
       <ol class="mt-10 space-y-8">
-        <li data-sc-cue="0.04 0.98 0.10 0.02" class="flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-cream-50 shadow-raised">1</span><div><h3 class="text-lg font-semibold">Talk to the assistant</h3><p class="text-ink-500">Chat with the bot on this page and share your website and email.</p></div></li>
-        <li data-sc-cue="0.34 0.98 0.10 0.02" class="flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-cream-50 shadow-raised">2</span><div><h3 class="text-lg font-semibold">Get a real demo page</h3><p class="text-ink-500">We build a working demo page styled like your site, with a chatbot trained on your business, and email you the link.</p></div></li>
-        <li data-sc-cue="0.62 0.98 0.10 0.02" class="flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-coral text-lg font-semibold text-ink shadow-coral">3</span><div><h3 class="text-lg font-semibold">Get a lead, then pay</h3><p class="text-ink-500">The chatbot is free. You pay only after it brings you a lead, billed automatically.</p></div></li>
+        <li data-sc-cue="0.04 0.98 0.10 0.02" class="flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-cream-50 shadow-raised">1</span><div><h3 class="text-lg font-semibold">Talk to the assistant</h3><p class="text-ink-500">Chat with the bot on this page and tell it about your business.</p></div></li>
+        <li data-sc-cue="0.34 0.98 0.10 0.02" class="flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ink text-lg font-semibold text-cream-50 shadow-raised">2</span><div><h3 class="text-lg font-semibold">Get your code</h3><p class="text-ink-500">Share your details in the chat and we email you a code for your chatbot.</p></div></li>
+        <li data-sc-cue="0.62 0.98 0.10 0.02" class="flex gap-5"><span class="font-display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-coral text-lg font-semibold text-ink shadow-coral">3</span><div><h3 class="text-lg font-semibold">Add it to your site</h3><p class="text-ink-500">Install the code on your website and your free chatbot is up and running that same day.</p></div></li>
       </ol>
     </div>
   </div>
  </div>
 </section>
 
-<!-- NO RISK -->
-<section id="pay" class="scroll-mt-20 py-24 sm:py-32">
+<!-- FREE -->
+<section id="free" class="scroll-mt-20 py-24 sm:py-32">
   <div class="mx-auto max-w-6xl px-5">
     <div class="grid gap-5 md:grid-cols-3">
       <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-4xl font-semibold text-coral-600 sm:text-5xl">Free</p><p class="mt-2 text-ink-500">The chatbot costs nothing to get.</p></div>
-      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-4xl font-semibold text-coral-600 sm:text-5xl">Lead first</p><p class="mt-2 text-ink-500">You get a lead before you pay anything.</p></div>
-      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-4xl font-semibold text-coral-600 sm:text-5xl">Auto-billed</p><p class="mt-2 text-ink-500">Billing happens automatically, only after a lead.</p></div>
+      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-4xl font-semibold text-coral-600 sm:text-5xl">Same day</p><p class="mt-2 text-ink-500">Add our code to your site and it’s up and running that day.</p></div>
+      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised"><p class="font-display text-4xl font-semibold text-coral-600 sm:text-5xl">Simple</p><p class="mt-2 text-ink-500">No plans to pick from. Start by chatting with the assistant.</p></div>
     </div>
     <div class="reveal relative mt-5 overflow-hidden rounded-[28px] bg-ink p-10 text-cream-50 shadow-floating sm:p-14" style="background-image: radial-gradient(30rem 16rem at 90% 0%, rgba(255,122,89,.26), transparent 70%), radial-gradient(24rem 14rem at 0% 100%, rgba(60,107,115,.75), transparent 70%);">
       <h2 class="font-display max-w-3xl text-3xl font-medium leading-snug sm:text-5xl" style="letter-spacing:-0.02em">Tired of paying for products that don't work?</h2>
-      <p class="mt-6 max-w-2xl text-lg text-cream/75">Chatbot Global works the other way around. The bot goes to work first. When it brings you a lead, you pay for that lead. Until then, you owe nothing.</p>
+      <p class="mt-6 max-w-2xl text-lg text-cream/75">Chatbot Global starts with something free. We email you a code, you add it to your site, and your chatbot is running that day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S THE CATCH -->
+<section id="catch" class="scroll-mt-20 pb-24 sm:pb-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-[.2em] text-coral-600">Fair question</p>
+      <h2 class="font-display mt-4 text-4xl font-semibold sm:text-5xl">So what's the catch?</h2>
+    </div>
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      <blockquote class="reveal relative overflow-hidden rounded-3xl bg-ink p-8 text-cream-50 shadow-floating sm:p-10 md:col-span-2" style="background-image: radial-gradient(26rem 14rem at 100% 0%, rgba(255,122,89,.28), transparent 70%), radial-gradient(22rem 14rem at 0% 100%, rgba(60,107,115,.7), transparent 70%);">
+        <p class="font-display text-2xl font-medium leading-snug sm:text-3xl" style="letter-spacing:-0.02em">Yes, there is a catch. I could easily sell this chatbot for $49 a month. I'm giving it away because I want to help you get new clients, so you'll use me for the other services I offer.</p>
+      </blockquote>
+      <div class="reveal rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised">
+        <h3 class="font-display text-2xl font-semibold">Other services are your choice</h3>
+        <p class="mt-3 text-ink-500">The chatbot is free to get. If you'd like more help later, it's up to you. Nothing is added unless you say yes.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -254,13 +277,13 @@ tailwind.config = {
   <div class="mx-auto max-w-6xl px-5">
     <div class="reveal mx-auto max-w-2xl text-center">
       <p class="text-sm font-semibold uppercase tracking-[.2em] text-coral-600">Who it's for</p>
-      <h2 class="font-display mt-4 text-4xl font-semibold sm:text-5xl">Starting with carpet cleaning companies.</h2>
-      <p class="mt-5 text-lg text-ink-500">We begin with carpet cleaners, where a missed call or message is a missed job. More trades are on the way.</p>
-      <a href="/carpet-cleaning/" class="spring lift mt-8 inline-block rounded-full bg-ink px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-raised hover:bg-ink-700 active:bg-ink">See the carpet cleaning bot</a>
-      <ul class="mt-8 flex flex-wrap justify-center gap-2 text-sm text-ink-500" aria-label="Coming soon">
-        <li class="rounded-full border border-ink/10 bg-cream px-3.5 py-1.5">HVAC · coming soon</li>
-        <li class="rounded-full border border-ink/10 bg-cream px-3.5 py-1.5">Plumbing · coming soon</li>
-        <li class="rounded-full border border-ink/10 bg-cream px-3.5 py-1.5">Landscaping · coming soon</li>
+      <h2 class="font-display mt-4 text-4xl font-semibold sm:text-5xl">Built for service companies.</h2>
+      <p class="mt-5 text-lg text-ink-500">If a missed call or message is a missed job for your company, this is for you.</p>
+      <a href="/carpet-cleaning/" class="spring lift mt-8 inline-block rounded-full bg-ink px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-raised hover:bg-ink-700 active:bg-ink">Try the carpet cleaning demo</a>
+      <ul class="mt-8 flex flex-wrap justify-center gap-2 text-sm text-ink-500" aria-label="Examples of service companies">
+        <li class="rounded-full border border-ink/10 bg-cream px-3.5 py-1.5">HVAC</li>
+        <li class="rounded-full border border-ink/10 bg-cream px-3.5 py-1.5">Plumbing</li>
+        <li class="rounded-full border border-ink/10 bg-cream px-3.5 py-1.5">Landscaping</li>
       </ul>
     </div>
   </div>
@@ -272,9 +295,9 @@ tailwind.config = {
     radial-gradient(40rem 22rem at 85% 0%, rgba(255,122,89,.38), transparent 65%),
     radial-gradient(34rem 20rem at 0% 100%, rgba(60,107,115,.85), transparent 65%), #0A2B32;">
     <div class="relative z-10">
-      <h2 class="font-display mx-auto max-w-3xl text-4xl font-semibold text-cream-50 sm:text-6xl">Get a free chatbot. Pay only for leads.</h2>
-      <p class="mx-auto mt-5 max-w-xl text-lg text-cream/75">Tell the assistant about your business and get a real demo page built in your site's style.</p>
-      <button type="button" data-open-chat data-sc-magnet="0.26" class="spring press mt-9 inline-block rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream-50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:bg-coral-600">Chat with the assistant</button>
+      <h2 class="font-display mx-auto max-w-3xl text-4xl font-semibold text-cream-50 sm:text-6xl">Get a free chatbot for your business.</h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg text-cream/75">Tell the assistant about your business and we’ll email you the code.</p>
+      <button type="button" data-open-chat data-sc-magnet="0.26" class="spring press mt-9 inline-block rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream-50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:bg-coral-600">Chat with the assistant</button> <button type="button" data-open-demo class="spring press mt-3 block rounded-full border border-cream/30 px-7 py-3.5 text-[15px] font-semibold text-cream-50 hover:bg-cream/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream-50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:bg-cream/20 mx-auto sm:mt-9 sm:ml-3 sm:inline-block">Get a demo by email</button>
     </div>
   </div>
 </section>
@@ -286,9 +309,10 @@ tailwind.config = {
     <img src="brand_assets/chatbot-global-logo.svg" alt="Chatbot Global" class="h-10 w-auto">
     <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-500" aria-label="Footer">
       <a href="#features" class="rounded hover:text-ink active:text-coral-600">What it does</a>
-      <a href="#pay" class="rounded hover:text-ink active:text-coral-600">No risk</a>
+      <a href="#free" class="rounded hover:text-ink active:text-coral-600">Free</a>
+      <a href="#catch" class="rounded hover:text-ink active:text-coral-600">The catch</a>
       <a href="/carpet-cleaning/" class="rounded hover:text-ink active:text-coral-600">Carpet cleaning</a>
-      <a href="#" class="rounded hover:text-ink active:text-coral-600">Privacy</a>
+      <a href="/privacy/" class="rounded hover:text-ink active:text-coral-600">Privacy</a>
       <a href="#" class="rounded hover:text-ink active:text-coral-600">Terms</a>
     </nav>
     <p class="text-sm text-ink-300">© 2026 Chatbot Global</p>
@@ -296,9 +320,32 @@ tailwind.config = {
 </footer>
 
 <script src="scrollcraft.js"></script>
+<script src="demo-request.js"></script>
 <!-- Live assistant: floating chat icon in the bottom-right corner -->
 <script src="https://platform.simplebotinstall.com/w/chat_plugin.js" data-bot-id="3791"></script>
 <script>ScrollCraft.mount(document.body);</script>
+<script>
+  // Hero headline: split into words so each rises into view (CSS handles timing + reduced-motion).
+  (function () {
+    var h = document.querySelector('[data-hero-words]'); if (!h) return;
+    var n = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var o = document.createElement('span'); o.className = 'hw';
+            var i = document.createElement('span'); i.style.setProperty('--i', n++); i.textContent = t;
+            o.appendChild(i); frag.appendChild(o);
+          });
+          node.replaceChild(frag, c);
+        } else if (c.nodeType === 1) walk(c);
+      });
+    })(h);
+  })();
+</script>
 <script>
   // Scroll reveals
   const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });

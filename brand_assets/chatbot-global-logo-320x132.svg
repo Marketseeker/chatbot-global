@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 132" width="320" height="132">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14525C"/>
+      <stop offset="1" stop-color="#0A2B32"/>
+    </linearGradient>
+    <clipPath id="globe"><circle cx="32" cy="29" r="19"/></clipPath>
+  </defs>
+  <g transform="translate(10 18) scale(1.6)">
+    <path d="M32 3C16.5 3 4 14.7 4 29.2c0 8.2 4 15.5 10.3 20.3L11 60.5c-.3 1 .8 1.7 1.6 1.1L25.2 54c2.2.4 4.400.6 6.800.6 15.500 0 28-11.700 28-26.200S47.500 3 32 3Z" fill="url(#bg)"/>
+    <g clip-path="url(#globe)" fill="none" stroke="#F4EFE6" stroke-width="1.800" stroke-linecap="round">
+      <circle cx="32" cy="29" r="19"/>
+      <ellipse cx="32" cy="29" rx="8.500" ry="19"/>
+      <path d="M13 29h38"/>
+      <path d="M16 20.500c10 3.500 22 3.500 32 0M16 37.500c10-3.500 22-3.500 32 0"/>
+    </g>
+    <circle cx="47.500" cy="14.500" r="5" fill="#FF7A59" stroke="#0A2B32" stroke-width="1.500"/>
+  </g>
+  <text x="118" y="73" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700" letter-spacing="-1" fill="#0A2B32">Chatbot</text>
+  <text x="120" y="98" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="7" fill="#FF7A59">GLOBAL</text>
+</svg>
