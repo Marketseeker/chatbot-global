@@ -30,9 +30,9 @@
   @media (min-width:640px) { .two { grid-template-columns:1fr 1fr; } }
   label, legend { display:block; font-weight:600; font-size:.95rem; margin-bottom:.35rem; }
   .opt { font-weight:400; color:var(--ink-500); }
-  input[type=text], input[type=email], input[type=url], input[type=tel], select { width:100%; font:inherit; font-size:1rem; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:12px; padding:.8rem 1rem; transition:border-color .15s, box-shadow .15s; }
-  input:hover, select:hover { border-color:rgba(10,43,50,.3); }
-  input:focus-visible, select:focus-visible { outline:none; border-color:var(--ink-700); box-shadow:0 0 0 3px rgba(242,96,60,.35); }
+  input[type=text], input[type=email], input[type=url], input[type=tel], select, textarea { width:100%; font:inherit; font-size:1rem; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:12px; padding:.8rem 1rem; transition:border-color .15s, box-shadow .15s; }
+  input:hover, select:hover, textarea:hover { border-color:rgba(10,43,50,.3); }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline:none; border-color:var(--ink-700); box-shadow:0 0 0 3px rgba(242,96,60,.35); }
   fieldset { border:0; padding:0; margin:0; }
   .choices { display:flex; flex-wrap:wrap; gap:.5rem; }
   .choices label { font-weight:500; margin:0; display:inline-flex; align-items:center; gap:.45rem; background:#fff; border:1px solid var(--line); border-radius:999px; padding:.5rem 1rem; cursor:pointer; }
@@ -40,6 +40,7 @@
   .choices input { accent-color:var(--coral); }
   .choices label:has(input:checked) { border-color:var(--coral); background:#FFF1EC; }
   .choices label:has(input:focus-visible) { box-shadow:0 0 0 3px rgba(242,96,60,.35); }
+  textarea { resize:vertical; min-height:6rem; line-height:1.5; }
   .hint { color:var(--ink-500); font-size:.9rem; margin:.35rem 0 0; }
   .err { color:var(--coral-600); font-size:.9rem; font-weight:600; margin:.35rem 0 0; min-height:0; }
   .hidden { display:none; }
@@ -133,6 +134,24 @@
           <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
         </div>
 
+        <div>
+          <label for="gbp">Your Google business listing <span class="opt">(optional)</span></label>
+          <input id="gbp" name="gbp" type="text" autocomplete="off" placeholder="Paste the link, or just your city">
+          <p class="hint">We read your website and Google listing so your chatbot knows your hours, services and area.</p>
+        </div>
+
+        <div>
+          <label for="leadEmail">Send new leads to <span class="opt">(optional)</span></label>
+          <input id="leadEmail" name="leadEmail" type="email" autocomplete="off" inputmode="email" placeholder="leads@yourcompany.com">
+          <p class="hint">Each new lead is emailed here. Leave blank to use your email above.</p>
+          <p class="err" id="leadEmail-err" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <label for="notes">Anything your chatbot should know? <span class="opt">(optional)</span></label>
+          <textarea id="notes" name="notes" rows="4" maxlength="1500" placeholder="Prices, special offers, areas you serve, or anything it shouldn't say"></textarea>
+        </div>
+
         <button type="submit" id="send">Get my free chatbot</button>
       </div>
       <p id="status" role="status" aria-live="polite"></p>
@@ -193,6 +212,7 @@
       name: val('name'), email: val('email').toLowerCase(), business: val('business'),
       website: val('website'), service: svc.value === 'Other' ? val('other') : svc.value,
       canEdit: canEditEl ? canEditEl.value : '', phone: val('phone'),
+      gbp: val('gbp'), leadEmail: val('leadEmail').toLowerCase(), notes: val('notes'),
       page: location.pathname + location.search, requestedAt: new Date().toISOString()
     };
     var first = null;
@@ -204,6 +224,7 @@
     if (!svc.value) bad('service', 'Please choose your kind of service.');
     else if (svc.value === 'Other' && !data.service) bad('other', 'Please tell us your kind of service.');
     if (!data.canEdit) bad('canEdit', 'Please choose one.');
+    if (data.leadEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.leadEmail)) bad('leadEmail', 'Please enter a valid email address, or leave this blank.');
     if (first) { first.focus(); return; }
 
     send.disabled = true; status.style.color = ''; status.textContent = 'Sending…';
