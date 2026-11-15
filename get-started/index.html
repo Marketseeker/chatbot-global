@@ -42,6 +42,9 @@
   .choices label:has(input:focus-visible) { box-shadow:0 0 0 3px rgba(242,96,60,.35); }
   textarea { resize:vertical; min-height:6rem; line-height:1.5; }
   .hint { color:var(--ink-500); font-size:.9rem; margin:.35rem 0 0; }
+  .check { display:flex; gap:.6rem; align-items:flex-start; font-weight:400; font-size:.88rem; line-height:1.5; color:var(--ink-500); margin:.65rem 0 0; cursor:pointer; }
+  .check input { flex:none; width:1.1rem; height:1.1rem; margin:.15rem 0 0; accent-color:var(--coral); cursor:pointer; }
+  .check a { color:var(--ink-700); }
   .err { color:var(--coral-600); font-size:.9rem; font-weight:600; margin:.35rem 0 0; min-height:0; }
   .hidden { display:none; }
   button { font:inherit; font-weight:600; font-size:1.05rem; width:100%; border:0; border-radius:999px; padding:1rem 1.5rem; background:var(--coral); color:var(--ink); cursor:pointer; box-shadow:0 8px 20px -8px rgba(242,96,60,.7); transition:transform .15s, background-color .15s, color .15s; }
@@ -132,6 +135,11 @@
         <div>
           <label for="phone">Phone <span class="opt">(optional)</span></label>
           <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+          <label class="check" for="smsConsent">
+            <input id="smsConsent" name="smsConsent" type="checkbox">
+            <span>Text me about my chatbot sign-up at this number <span class="opt">(optional)</span>. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy/">privacy policy</a>.</span>
+          </label>
+          <p class="err" id="phone-err" aria-live="polite"></p>
         </div>
 
         <div>
@@ -212,6 +220,8 @@
       name: val('name'), email: val('email').toLowerCase(), business: val('business'),
       website: val('website'), service: svc.value === 'Other' ? val('other') : svc.value,
       canEdit: canEditEl ? canEditEl.value : '', phone: val('phone'),
+      smsConsent: document.getElementById('smsConsent').checked,
+      smsConsentText: document.getElementById('smsConsent').checked ? document.querySelector('label[for=smsConsent] > span').textContent.replace(/\s+/g, ' ').trim() : '',
       gbp: val('gbp'), leadEmail: val('leadEmail').toLowerCase(), notes: val('notes'),
       page: location.pathname + location.search, requestedAt: new Date().toISOString()
     };
@@ -224,6 +234,7 @@
     if (!svc.value) bad('service', 'Please choose your kind of service.');
     else if (svc.value === 'Other' && !data.service) bad('other', 'Please tell us your kind of service.');
     if (!data.canEdit) bad('canEdit', 'Please choose one.');
+    if (data.smsConsent && data.phone.replace(/\D/g, '').length < 10) bad('phone', 'Please enter your mobile number so we can text you, or untick the text box.');
     if (data.leadEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.leadEmail)) bad('leadEmail', 'Please enter a valid email address, or leave this blank.');
     if (first) { first.focus(); return; }
 
