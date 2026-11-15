@@ -47,6 +47,7 @@
   .check a { color:var(--ink-700); }
   .err { color:var(--coral-600); font-size:.9rem; font-weight:600; margin:.35rem 0 0; min-height:0; }
   .hidden { display:none; }
+  .hp { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
   button { font:inherit; font-weight:600; font-size:1.05rem; width:100%; border:0; border-radius:999px; padding:1rem 1.5rem; background:var(--coral); color:var(--ink); cursor:pointer; box-shadow:0 8px 20px -8px rgba(242,96,60,.7); transition:transform .15s, background-color .15s, color .15s; }
   button:hover { background:var(--coral-600); color:var(--cream-50); }
   button:active { transform:translateY(1px); }
@@ -160,6 +161,12 @@
           <textarea id="notes" name="notes" rows="4" maxlength="1500" placeholder="Prices, special offers, areas you serve, or anything it shouldn't say"></textarea>
         </div>
 
+        <!-- Honeypot: hidden from people, often filled in by bots. Leave empty. -->
+        <div class="hp" aria-hidden="true">
+          <label for="fax">Fax number</label>
+          <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
         <button type="submit" id="send">Get my free chatbot</button>
       </div>
       <p id="status" role="status" aria-live="polite"></p>
@@ -188,6 +195,7 @@
     'Painting', 'Pest control', 'Plumbing', 'Pool service', 'Roofing', 'Tree service',
     'Water damage restoration', 'Window cleaning & pressure washing', 'Other'
   ];
+  var loadedAt = Date.now(); // used to spot bots that submit within seconds
   var form = document.getElementById('signup');
   var svc = document.getElementById('service');
   var otherWrap = document.getElementById('other-wrap');
@@ -223,7 +231,8 @@
       smsConsent: document.getElementById('smsConsent').checked,
       smsConsentText: document.getElementById('smsConsent').checked ? document.querySelector('label[for=smsConsent] > span').textContent.replace(/\s+/g, ' ').trim() : '',
       gbp: val('gbp'), leadEmail: val('leadEmail').toLowerCase(), notes: val('notes'),
-      page: location.pathname + location.search, requestedAt: new Date().toISOString()
+      page: location.pathname + location.search, requestedAt: new Date().toISOString(),
+      fax: document.getElementById('fax').value, elapsedMs: Date.now() - loadedAt
     };
     var first = null;
     function bad(id, msg) { setErr(id, msg); if (!first) first = document.getElementById(id) || form.querySelector('input[name=' + id + ']'); }
