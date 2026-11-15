@@ -11,7 +11,25 @@
     'Painting', 'Pest control', 'Plumbing', 'Pool service', 'Roofing', 'Tree service',
     'Water damage restoration', 'Window cleaning & pressure washing', 'Other'
   ];
-  var dlg, form, status, sendBtn, svc, other, otherWrap, email, lastFocus;
+  // Cloudflare Turnstile (checks the visitor is a person; n8n verifies the token).
+  var TURNSTILE_SITEKEY = window.TURNSTILE_SITEKEY || '0x4AAAAAAGCSfBoJVxmaC11c';
+  var dlg, form, status, sendBtn, svc, other, otherWrap, email, lastFocus, tsBox, tsId = null, loadedAt;
+
+  function loadTurnstile(cb) {
+    if (window.turnstile) return cb();
+    window.__demoTsReady = cb;
+    var sc = document.createElement('script');
+    sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__demoTsReady';
+    sc.async = true; sc.defer = true;
+    document.head.appendChild(sc);
+  }
+  function renderTurnstile() {
+    loadTurnstile(function () {
+      if (tsId !== null) { try { window.turnstile.reset(tsId); } catch (_) {} return; }
+      tsId = window.turnstile.render(tsBox, { sitekey: TURNSTILE_SITEKEY, size: 'flexible', theme: 'light' });
+    });
+  }
+  function tsToken() { try { return tsId !== null ? (window.turnstile.getResponse(tsId) || '') : ''; } catch (_) { return ''; } }
 
   var FIELD = 'w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-[15px] text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral';
 
@@ -36,6 +54,8 @@
           '<input id="demo-other" name="other" type="text" autocomplete="off" class="mt-1.5 ' + FIELD + '"></div>' +
         '<label class="mt-4 block text-sm font-semibold" for="demo-email">Your email</label>' +
         '<input id="demo-email" name="email" type="email" required autocomplete="email" inputmode="email" class="mt-1.5 ' + FIELD + '" placeholder="you@yourcompany.com">' +
+        '<div id="demo-turnstile" class="mt-5"></div>' +
+        '<div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap"><label for="demo-fax">Fax number</label><input id="demo-fax" name="fax" type="text" tabindex="-1" autocomplete="off"></div>' +
         '<p id="demo-status" role="status" aria-live="polite" class="mt-4 min-h-[1.5rem] text-sm text-ink-500"></p>' +
         '<button type="submit" id="demo-send" class="spring lift mt-2 inline-flex w-full items-center justify-center rounded-full bg-coral px-7 py-3.5 text-[15px] font-semibold text-ink shadow-coral hover:bg-coral-600 hover:text-cream-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50 active:bg-coral-600 disabled:opacity-60">Email me the demo</button>' +
       '</form>';
@@ -47,6 +67,7 @@
     other = dlg.querySelector('#demo-other');
     otherWrap = dlg.querySelector('#demo-other-wrap');
     email = dlg.querySelector('#demo-email');
+    tsBox = dlg.querySelector('#demo-turnstile');
 
     svc.addEventListener('change', function () {
       var isOther = svc.value === 'Other';
@@ -70,19 +91,26 @@
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr)) { say('Please enter a valid email address.', true); email.focus(); return; }
     var service = svc.value === 'Other' ? other.value.trim() : svc.value;
     if (!service) { say('Please tell us your kind of service.', true); other.focus(); return; }
+    var token = tsToken();
+    if (!token) { say('One moment: we’re checking that you’re a person. Please try again in a few seconds.', true); return; }
     sendBtn.disabled = true; say('Sending…');
     fetch(DEMO_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: addr, service: service, page: location.pathname, requestedAt: new Date().toISOString() })
+      body: JSON.stringify({ email: addr, service: service, page: location.pathname, requestedAt: new Date().toISOString(),
+        fax: dlg.querySelector('#demo-fax').value, elapsedMs: Date.now() - loadedAt, turnstileToken: token })
     }).then(function (r) {
+      if (r.status === 403) { var err = new Error('check'); err.check = true; throw err; }
       if (!r.ok) throw new Error('bad status ' + r.status);
       form.reset(); otherWrap.classList.add('hidden');
       say('Done. Check your email for your demo. If it doesn’t show up in a few minutes, look in your spam folder.');
       if (typeof gtag === 'function') gtag('event', 'demo_request', { service: service });
-    }).catch(function () {
-      say('Sorry, that didn’t go through. Please try again in a moment.', true);
-    }).then(function () { sendBtn.disabled = false; });
+    }).catch(function (err) {
+      say(err && err.check ? 'The security check didn’t go through. Please try sending again.' : 'Sorry, that didn’t go through. Please try again in a moment.', true);
+    }).then(function () {
+      sendBtn.disabled = false;
+      renderTurnstile(); // tokens work once; get a fresh one for the next send
+    });
   }
 
   function open(btn) {
@@ -96,6 +124,8 @@
       svc.dispatchEvent(new Event('change'));
     }
     status.textContent = '';
+    loadedAt = Date.now();
+    renderTurnstile();
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
     email.focus();
   }

@@ -45,6 +45,8 @@
   .check { display:flex; gap:.6rem; align-items:flex-start; font-weight:400; font-size:.88rem; line-height:1.5; color:var(--ink-500); margin:.65rem 0 0; cursor:pointer; }
   .check input { flex:none; width:1.1rem; height:1.1rem; margin:.15rem 0 0; accent-color:var(--coral); cursor:pointer; }
   .check a { color:var(--ink-700); }
+  .cf-turnstile { min-height:65px; margin:0 -8px; } /* widget is at least 300px wide */
+  @media (min-width:400px) { .cf-turnstile { margin:0; } }
   .err { color:var(--coral-600); font-size:.9rem; font-weight:600; margin:.35rem 0 0; min-height:0; }
   .hidden { display:none; }
   .hp { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
@@ -167,6 +169,9 @@
           <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
         </div>
 
+        <!-- Cloudflare Turnstile: quick check that the visitor is a person. n8n verifies the token. -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAGCSfBoJVxmaC11c" data-size="flexible" data-theme="light"></div>
+
         <button type="submit" id="send">Get my free chatbot</button>
       </div>
       <p id="status" role="status" aria-live="polite"></p>
@@ -185,6 +190,7 @@
 
 <footer>&copy; 2026 Chatbot Global &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a></footer>
 
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
 (function () {
   var SIGNUP_WEBHOOK = window.SIGNUP_WEBHOOK || 'https://n8n.chatbotglobal.com/webhook/signup';
@@ -232,7 +238,8 @@
       smsConsentText: document.getElementById('smsConsent').checked ? document.querySelector('label[for=smsConsent] > span').textContent.replace(/\s+/g, ' ').trim() : '',
       gbp: val('gbp'), leadEmail: val('leadEmail').toLowerCase(), notes: val('notes'),
       page: location.pathname + location.search, requestedAt: new Date().toISOString(),
-      fax: document.getElementById('fax').value, elapsedMs: Date.now() - loadedAt
+      fax: document.getElementById('fax').value, elapsedMs: Date.now() - loadedAt,
+      turnstileToken: (form.querySelector('[name="cf-turnstile-response"]') || {}).value || ''
     };
     var first = null;
     function bad(id, msg) { setErr(id, msg); if (!first) first = document.getElementById(id) || form.querySelector('input[name=' + id + ']'); }
@@ -246,10 +253,18 @@
     if (data.smsConsent && data.phone.replace(/\D/g, '').length < 10) bad('phone', 'Please enter your mobile number so we can text you, or untick the text box.');
     if (data.leadEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.leadEmail)) bad('leadEmail', 'Please enter a valid email address, or leave this blank.');
     if (first) { first.focus(); return; }
+    if (!data.turnstileToken) {
+      status.style.color = 'var(--coral-600)';
+      status.textContent = 'One moment: we’re checking that you’re a person. Please try again in a few seconds.';
+      return;
+    }
 
     send.disabled = true; status.style.color = ''; status.textContent = 'Sending…';
     fetch(SIGNUP_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-      .then(function (r) { if (!r.ok) throw new Error('status ' + r.status); })
+      .then(function (r) {
+        if (r.status === 403) { var e = new Error('check'); e.check = true; throw e; }
+        if (!r.ok) throw new Error('status ' + r.status);
+      })
       .then(function () {
         document.getElementById('done-name').textContent = data.name.split(' ')[0];
         document.getElementById('done-email').textContent = data.email;
@@ -257,9 +272,13 @@
         var done = document.getElementById('done'); done.classList.remove('hidden'); done.focus();
         if (typeof gtag === 'function') gtag('event', 'sign_up', { service: data.service });
       })
-      .catch(function () {
+      .catch(function (err) {
         status.style.color = 'var(--coral-600)';
-        status.textContent = 'Sorry, that didn’t go through. Please try again in a moment.';
+        status.textContent = err && err.check
+          ? 'The security check didn’t go through. Please try sending again.'
+          : 'Sorry, that didn’t go through. Please try again in a moment.';
+        // Each Turnstile token works once, so get a fresh one for the retry.
+        if (window.turnstile) try { window.turnstile.reset(); } catch (_) {}
       })
       .then(function () { send.disabled = false; });
   });
