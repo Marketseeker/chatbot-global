@@ -114,3 +114,4 @@ Note: the existing `index.html` is an earlier generic "multilingual support chat
 2. What exactly does the bot do?
 3. Which industries appear as tabs?
 4. Is there pricing, a demo, or a booking link for the call to action? (Default: "Book a demo" placeholder.)
+- Free for the first customers only (owner, 2026-11-17). Site, carpet page, FAQs and demo bots currently say "The chatbot is free" with no limit. Do not change the wording until the owner decides how many "first customers" and what later customers pay (BUSINESS-PLAN.md, open question 00). Do not promise it stays free.
