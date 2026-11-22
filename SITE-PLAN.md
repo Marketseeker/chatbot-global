@@ -73,7 +73,7 @@ TBD — confirm with owner before writing copy. Candidates: lead capture, bookin
 - **Later page (not built): missed calls / after-hours answering.** General, not carpet-specific. Keywords: small business answering service (720/mo, KD 28), after hours answering service for small business (110, KD 23). Angle: customers who call or visit while the owner is on a job. Check how the free chatbot differs from a phone answering service before writing it (the chatbot answers website visitors, not phone calls).
 
 ## Tech
-- Static HTML, Tailwind via CDN, served locally with `node serve.mjs` (see CLAUDE.md for design and screenshot rules).
+- Static HTML, Tailwind prebuilt into `styles.css` (since 22 November, see CLAUDE.md), served locally with `node serve.mjs` (see CLAUDE.md for design and screenshot rules).
 - Revisit a static site generator (e.g. Astro) if the page count grows large enough that shared templates are needed.
 
 ## Brand
@@ -114,4 +114,4 @@ Note: the existing `index.html` is an earlier generic "multilingual support chat
 2. What exactly does the bot do?
 3. Which industries appear as tabs?
 4. Is there pricing, a demo, or a booking link for the call to action? (Default: "Book a demo" placeholder.)
-- Free for the first customers only (owner, 2026-11-17). Site, carpet page, FAQs and demo bots currently say "The chatbot is free" with no limit. Do not change the wording until the owner decides how many "first customers" and what later customers pay (BUSINESS-PLAN.md, open question 00). Do not promise it stays free.
+- Free for the first 10 clients (owner, 2026-11-17, number set 2026-11-21). The carpet page says "free for our first clients" (live 21 November, owner approved). The home page, its FAQs and the demo bots still say "The chatbot is free" with no limit; change them only with the owner’s yes. What client 11 onward pays is undecided (BUSINESS-PLAN.md, open question 00). Do not promise it stays free.
