@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog: Straight Answers for Service Companies | Chatbot Global</title>
+<link rel="canonical" href="https://chatbotglobal.com/blog/">
+<meta name="description" content="Practical guides for owners of service companies: getting more from your website, answering leads faster and handling after-hours questions.">
+<link rel="icon" type="image/svg+xml" href="/brand_assets/chatbot-global-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:   { DEFAULT: '#0A2B32', 700: '#14525C', 500: '#3C6B73', 300: '#8FB0B4' },
+        coral: { DEFAULT: '#FF7A59', 600: '#F2603C', 100: '#FFE3DA' },
+        cream: { DEFAULT: '#F4EFE6', 200: '#EAE3D5', 50: '#FBF8F2' }
+      },
+      fontFamily: {
+        display: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+      },
+      boxShadow: {
+        raised:   '0 1px 2px rgba(10,43,50,.06), 0 8px 24px -8px rgba(10,43,50,.14)',
+        floating: '0 2px 4px rgba(10,43,50,.05), 0 24px 48px -16px rgba(10,43,50,.28), 0 48px 96px -32px rgba(20,82,92,.30)',
+        coral:    '0 1px 2px rgba(242,96,60,.35), 0 10px 24px -8px rgba(255,122,89,.55)'
+      }
+    }
+  }
+}
+</script>
+<style>
+  html { -webkit-font-smoothing: antialiased; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; line-height: 1.7; background: #F4EFE6; color: #0A2B32; }
+  .font-display { letter-spacing: -0.03em; line-height: 1.04; font-variation-settings: 'opsz' 60; font-variant-numeric: lining-nums; }
+  h1.font-display { letter-spacing: -0.028em; }
+
+  /* grain overlay */
+  .grain::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .04 0 0 0 0 .17 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* spring motion: transform + opacity only */
+  .spring { transition-property: transform, opacity; transition-duration: .4s; transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
+  .lift:hover { transform: translateY(-3px); }
+  .lift:active { transform: translateY(0) scale(.98); }
+  .press:active { transform: scale(.96); }
+  :focus-visible { outline: 2px solid #FF7A59; outline-offset: 3px; border-radius: 10px; }
+
+  .reveal { opacity: 0; transform: translateY(18px); }
+  .reveal.in { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.34,1.3,.64,1); }
+
+  .msg { animation: pop .45s cubic-bezier(.34,1.56,.64,1) both; transform-origin: bottom left; }
+  .msg.user { transform-origin: bottom right; }
+  .msg:nth-child(2) { animation-delay: .5s; } .msg:nth-child(3) { animation-delay: 1.1s; } .msg:nth-child(4) { animation-delay: 1.7s; } .msg:nth-child(5) { animation-delay: 2.3s; }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.94); } to { opacity: 1; transform: none; } }
+  .float { animation: float 7s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* FAQ */
+  details summary { list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details .chev { transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+  details[open] .chev { transform: rotate(45deg); }
+  @media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+</style>
+<link rel="stylesheet" href="/scroll-effects.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Blog", "name": "Chatbot Global Blog", "url": "https://chatbotglobal.com/blog/", "publisher": { "@type": "Organization", "name": "Chatbot Global", "url": "https://chatbotglobal.com/" },
+      "blogPost": [ { "@type": "BlogPosting", "headline": "Contractor Website Not Getting Leads? Check These 8 Things First", "url": "https://chatbotglobal.com/blog/website-not-getting-leads/", "datePublished": "2026-11-22" } ] },
+    { "@type": "BreadcrumbList", "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://chatbotglobal.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://chatbotglobal.com/blog/" } ] }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-211HMVTFT8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-211HMVTFT8');
+</script>
+</head>
+<body class="antialiased">
+<span data-sc-progress aria-hidden="true"></span>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-40">
+  <div class="mx-auto mt-4 flex max-w-6xl items-center justify-between rounded-full border border-ink/10 bg-cream-50/80 px-4 py-2.5 shadow-raised backdrop-blur-xl sm:px-6" style="width:calc(100% - 2rem)">
+    <a href="/" class="spring press flex items-center gap-2.5 rounded-full">
+      <svg viewBox="0 0 64 64" class="h-9 w-9" aria-hidden="true">
+        <defs>
+          <linearGradient id="nbg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#14525C"/><stop offset="1" stop-color="#0A2B32"/></linearGradient>
+          <clipPath id="ng"><circle cx="32" cy="29" r="19"/></clipPath>
+        </defs>
+        <path d="M32 3C16.5 3 4 14.7 4 29.2c0 8.2 4 15.5 10.3 20.3L11 60.5c-.3 1 .8 1.7 1.6 1.1L25.2 54c2.2.4 4.4.6 6.8.6 15.5 0 28-11.7 28-26.200S47.500 3 32 3Z" fill="url(#nbg)"/>
+        <g clip-path="url(#ng)" fill="none" stroke="#F4EFE6" stroke-width="1.8" stroke-linecap="round"><circle cx="32" cy="29" r="19"/><ellipse cx="32" cy="29" rx="8.5" ry="19"/><path d="M13 29h38M16 20.5c10 3.5 22 3.5 32 0M16 37.5c10-3.5 22-3.5 32 0"/></g>
+        <circle cx="47.5" cy="14.5" r="5" fill="#FF7A59" stroke="#0A2B32" stroke-width="1.5"/>
+      </svg>
+      <span class="leading-none"><span class="font-display block text-[19px] font-bold tracking-tight">Chatbot</span><span class="block text-[8.5px] font-semibold uppercase tracking-[.42em] text-coral-600">Global</span></span>
+    </a>
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+      <a href="/" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Home</a>
+      <a href="/#industries" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Who it's for</a>
+      <a href="/blog/" class="rounded-full px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink/5 hover:text-ink active:bg-ink/10">Blog</a>
+    </nav>
+    <div class="flex shrink-0 items-center gap-2">
+      <a href="/get-started/" class="spring lift shrink-0 whitespace-nowrap rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-cream-50 shadow-raised hover:bg-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50 active:bg-ink">Get my free chatbot</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="grain relative overflow-hidden pt-32 pb-16 sm:pt-40" style="background:
+  radial-gradient(60rem 36rem at 88% 8%, rgba(255,122,89,.20), transparent 60%),
+  radial-gradient(48rem 32rem at 4% 30%, rgba(20,82,92,.16), transparent 62%), #F4EFE6;">
+  <div class="relative z-10 mx-auto max-w-3xl px-5">
+    <nav aria-label="Breadcrumb" class="reveal">
+      <ol class="flex items-center gap-2 text-[13px] font-medium text-ink-500">
+        <li><a href="/" class="rounded hover:text-ink active:text-coral-600">Home</a></li>
+        <li aria-hidden="true" class="text-ink-300">/</li>
+        <li aria-current="page" class="text-ink">Blog</li>
+      </ol>
+    </nav>
+    <h1 class="reveal font-display mt-6 text-[clamp(2.6rem,6vw,4.4rem)] font-semibold text-ink">Straight answers for <em class="not-italic text-coral-600">service company owners.</em></h1>
+    <p class="reveal mt-6 max-w-xl text-lg text-ink-500">Practical guides on getting more from the website you already have, answering leads faster and handling the questions that come in after hours.</p>
+  </div>
+</section>
+
+<section class="px-5 pb-24 sm:pb-32">
+  <div class="mx-auto max-w-3xl space-y-5">
+    <article class="reveal spring lift rounded-3xl border border-ink/10 bg-cream-50 p-8 shadow-raised">
+      <p class="text-sm font-medium text-ink-500">22 November 2026 · 8 minute read</p>
+      <h2 class="font-display mt-3 text-3xl font-semibold"><a href="/blog/website-not-getting-leads/" class="rounded hover:text-coral-600 active:text-coral-600">Contractor website not getting leads? Check these 8 things first</a></h2>
+      <p class="mt-3 text-ink-500">Your site gets visitors but the phone stays quiet. Eight checks you can run on your own phone in about ten minutes, from tap-to-call to after-hours questions.</p>
+      <a href="/blog/website-not-getting-leads/" class="mt-5 inline-block rounded font-semibold text-ink underline decoration-coral decoration-2 underline-offset-4 hover:text-coral-600 active:text-coral-600">Read the 8-point checklist</a>
+    </article>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-ink/10 bg-cream-50">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-5 py-10 sm:flex-row">
+    <a href="/" class="spring press rounded" aria-label="Chatbot Global home"><img src="/brand_assets/chatbot-global-logo.svg" alt="Chatbot Global" class="h-10 w-auto"></a>
+    <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-ink-500" aria-label="Footer">
+      <a href="/" class="rounded hover:text-ink active:text-coral-600">Home</a>
+      <a href="/get-started/" class="rounded hover:text-ink active:text-coral-600">Get started</a>
+      <a href="/blog/" class="rounded hover:text-ink active:text-coral-600">Blog</a>
+      <a href="/privacy/" class="rounded hover:text-ink active:text-coral-600">Privacy</a>
+      <a href="/terms/" class="rounded hover:text-ink active:text-coral-600">Terms</a>
+    </nav>
+    <p class="text-sm text-ink-500">© 2026 Chatbot Global</p>
+  </div>
+</footer>
+
+<script src="/scrollcraft.js"></script>
+<!-- Live assistant: the Chatbot Global assistant, for owners reading the blog -->
+<script src="https://platform.simplebotinstall.com/w/chat_plugin.js" data-bot-id="3791"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script>
+  // Scroll reveals
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+</script>
+</body>
+</html>
