@@ -118,3 +118,10 @@ Note: the existing `index.html` is an earlier generic "multilingual support chat
 3. Which industries appear as tabs?
 4. Is there pricing, a demo, or a booking link for the call to action? (Default: "Book a demo" placeholder.)
 - Free for the first 10 clients (owner, 2026-11-17, number set 2026-11-21). The carpet page says "free for our first clients" (live 21 November, owner approved). The home page, its FAQs and the demo bots still say "The chatbot is free" with no limit; change them only with the owner’s yes. What client 11 onward pays is undecided (BUSINESS-PLAN.md, open question 00). Do not promise it stays free.
+
+## 2026-11-27 — Month-to-month billing, retainer message
+- Owner: billing is month to month. A month over 25 chats costs $49 for that month; the fee is waived in any month we're working together on a fix. Not "forever" and not "60 days".
+- Right-hand "So what's the catch?" card on the home page now reads "Tired of $2,000/Month SEO Retainers?" (owner's exact text). The catch FAQ answer on the 20 trade pages carries the same message (fix it yourself, or flat $200–$300 per fix, zero retainers).
+- SEO menu changed from "free for 60 days with every fix" to "free in any month we're working on a fix".
+- Blog posts carry no pricing message (only "Get my free chatbot" buttons), so nothing changed there.
+- DECIDED: the free limit is 25 customer chats a month (chats, not leads or messages). Aminos cannot enforce it; count chats by hand each month for now.
