@@ -27,6 +27,7 @@
   Array.prototype.forEach.call(forms, function (form) {
     var box = form.querySelector('[data-cd-ts]'), st = form.querySelector('[data-cd-status]'), btn = form.querySelector('[data-cd-send]');
     var service = form.getAttribute('data-service') || 'Other';
+    function pickService() { return (form.elements.service && form.elements.service.value) || service; }
     var tsId = null, loadedAt = Date.now(), started = false;
 
     function say(m, bad) { st.textContent = m; st.className = 'mt-4 min-h-[1.5rem] text-sm ' + (bad ? 'font-semibold text-coral-600' : 'text-ink-500'); }
@@ -50,7 +51,7 @@
       if (!t) { if (!started) { started = true; render(); } say('One moment: we’re checking that you’re a person. Please try again in a few seconds.', true); return; }
       btn.disabled = true; say('Sending…');
       fetch(HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-        requestType: 'custom-demo', name: name, email: email, business: site, website: site, service: service, canEdit: 'not sure',
+        requestType: 'custom-demo', name: name, email: email, business: site, website: site, service: pickService(), canEdit: 'not sure',
         phone: '', smsConsent: false, smsConsentText: '', gbp: '', leadEmail: '',
         notes: 'CUSTOM DEMO REQUEST. Build a private demo bot trained on this website and email the link. Not a sign-up.',
         page: location.pathname, requestedAt: new Date().toISOString(), fax: form.fax.value,
@@ -60,7 +61,7 @@
         if (!r.ok) throw new Error('status ' + r.status);
         form.reset();
         say('Got it. We’ll build your private demo and email the link to ' + email + '. Check your spam folder if it doesn’t show up.');
-        if (typeof gtag === 'function') gtag('event', 'custom_demo_request', { service: service });
+        if (typeof gtag === 'function') gtag('event', 'custom_demo_request', { service: pickService() });
       }).catch(function (err) {
         say(err && err.check ? 'The security check didn’t go through. Please try sending again.' : 'Sorry, that didn’t go through. Please try again in a moment.', true);
       }).then(function () { btn.disabled = false; render(); });
