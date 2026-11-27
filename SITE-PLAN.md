@@ -125,3 +125,8 @@ Note: the existing `index.html` is an earlier generic "multilingual support chat
 - SEO menu changed from "free for 60 days with every fix" to "free in any month we're working on a fix".
 - Blog posts carry no pricing message (only "Get my free chatbot" buttons), so nothing changed there.
 - DECIDED: the free limit is 25 customer chats a month (chats, not leads or messages). Aminos cannot enforce it; count chats by hand each month for now.
+
+## 2026-11-27 — Unlimited price is $22.95
+- Owner: unlimited chats cost $22.95 a month (was $49). Changed on the home page, the 20 trade pages, the SEO menu, BUSINESS-PLAN.md and the local copies of the bot prompts in 08-Aminos. Earlier dated entries above still say $49 as history. The owner's original "catch" quote ("I could easily sell this chatbot for $49 a month") is left as written in BUSINESS-PLAN.md.
+- The live Aminos bots (Globa and the demo bots) still say $49 until their settings are updated; the Aminos connection was down when this changed.
+- New page /demo/ (custom demo request form, same pipeline as the home form; `custom-demo.js` now reads the optional service menu).
